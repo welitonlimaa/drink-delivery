@@ -1,6 +1,6 @@
-const { users } = require('../database/models')
+const { Users } = require('../database/models')
 
-const getAll = () => users.findAll({ attributes: { exclude: 'password' } })
+const getAll = () => Users.findAll({ attributes: { exclude: 'password' } })
 
 module.exports = {
   getAll,
