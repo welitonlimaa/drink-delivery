@@ -28,11 +28,11 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'sale_id',
       as: 'sale',
     });
-    Sales.belongsTo(models.User, {
+    Sales.belongsTo(models.Users, {
       foreignKey: 'user_id',
       as: 'user',
     });
-    Sales.belongsTo(models.User, {
+    Sales.belongsTo(models.Users, {
       foreignKey: 'seller_id',
       as: 'seller',
     });
