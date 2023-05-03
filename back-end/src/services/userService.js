@@ -18,7 +18,7 @@ const login = async ({ email, password }) => {
 
   const token = createToken({ name, email, role });
 
-  return { type: 200, message: { token } };
+  return { type: 200, message: { name, email, role, token } };
 };
 
 const register = async ({ name, email, password, role }) => {
