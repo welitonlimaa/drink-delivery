@@ -1,4 +1,4 @@
-
+config.js
 # Created by https://www.gitignore.io/api/node,macos,windows,linux,visualstudiocode,intellij
 # Edit at https://www.gitignore.io/?templates=node,macos,windows,linux,visualstudiocode,intellij
 
@@ -297,3 +297,5 @@ back-end/.env
 **/reports/**/*
 **/coverage
 **/.nyc_output
+back-end/src/database/config/config.js
+back-end/src/database/config/config.js
