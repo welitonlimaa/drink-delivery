@@ -1,12 +1,12 @@
 const express = require('express');
-const { userRoutes, loginRoutes } = require('../routers');
+const { registerRoute, loginRoute } = require('../routers');
 
 const app = express();
 app.use(express.json());
 
-app.use('/login', loginRoutes);
+app.use('/login', loginRoute);
 
-app.use('/register', userRoutes);
+app.use('/register', registerRoute);
 
 app.get('/coffee', (_req, res) => res.status(418).end());
 
