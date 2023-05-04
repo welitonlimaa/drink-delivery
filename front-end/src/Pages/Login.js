@@ -1,59 +1,22 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import AppContext from '../context/AppContext';
 import logo from '../images/logo.png';
+import dataValidate from '../utils/dataValidate';
 
 function Login() {
-  const { email, setEmail, password, setPassword } = useContext(AppContext);
-  const history = useHistory();
-
+  const { fields, setFormFields } = useContext(AppContext);
   const [isValid, setIsValid] = useState(false);
 
-  const validateForms = () => {
-    let emailValidation = false;
-
-    // the email validation was found at:
-    // https://www.simplilearn.com/tutorials/javascript-tutorial/email-validation-in-javascript
-    const regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-
-    if (email.match(regex) && email.includes('.')) {
-      emailValidation = true;
-    } else {
-      emailValidation = false;
-    }
-
-    const minLength = 6;
-
-    if (emailValidation && password.length >= minLength) {
-      setIsValid(true);
-    } else {
-      setIsValid(false);
-    }
-    // (emailValidation && password.length >= minLength) ? setIsValid(true) : setIsValid(false);
-  };
-
-  const handleChange = ({ target }) => {
-    const { name, value } = target;
-
-    switch (name) {
-    case 'email':
-      setEmail(value);
-      break;
-    case 'password':
-      setPassword(value);
-      break;
-    default:
-      break;
-    }
-  };
-
   useEffect(() => {
-    validateForms();
-  }, [email, password]);
+    const data = dataValidate(fields);
+    setIsValid((data.email && data.password));
+  }, [fields]);
 
+  const history = useHistory();
   const handleClick = () => {
     if (isValid) {
-      history.push('/register');
+      history.push('/customer/products');
     }
   };
 
@@ -75,8 +38,8 @@ function Login() {
             type="text"
             id="email-input"
             name="email"
-            value={ email }
-            onChange={ (e) => handleChange(e) }
+            value={ fields.email }
+            onChange={ setFormFields }
             data-testid="common_login__input-email"
           />
         </label>
@@ -91,12 +54,16 @@ function Login() {
             type="password"
             name="password"
             id="password-input"
-            value={ password }
-            onChange={ (e) => handleChange(e) }
+            value={ fields.password }
+            onChange={ setFormFields }
             data-testid="common_login__input-password"
           />
         </label>
         <button
+          type="button"
+          disabled={ !isValid }
+          onClick={ handleClick }
+          data-testid="common_login__button-login"
           className="flex items-center
           justify-center
           h-12
@@ -109,10 +76,6 @@ function Login() {
           text-sm
           text-blue-100
           hover:bg-blue-700"
-          type="button"
-          disabled={ !isValid }
-          onClick={ handleClick }
-          data-testid="common_login__button-login"
         >
           Login
         </button>

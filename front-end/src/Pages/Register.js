@@ -1,67 +1,24 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import logo from '../images/logo.png';
 import AppContext from '../context/AppContext';
+import dataValidate from '../utils/dataValidate';
 
 function Register() {
-  const {
-    email,
-    setEmail,
-    password,
-    setPassword,
-    completeName,
-    setCompleteName,
-  } = useContext(AppContext);
+  const { fields, setFormFields } = useContext(AppContext);
   const [isValid, setIsValid] = useState(false);
 
-  const validateForms = () => {
-    let emailValidation = false;
-
-    // the email validation was found at:
-    // https://www.simplilearn.com/tutorials/javascript-tutorial/email-validation-in-javascript
-    const regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-
-    if (email.match(regex) && email.includes('.')) {
-      emailValidation = true;
-    } else {
-      emailValidation = false;
-    }
-
-    const minpassWord = 6;
-
-    const minName = 12;
-
-    if (emailValidation
-      && password.length >= minpassWord
-      && completeName.length >= minName) {
-      setIsValid(true);
-    } else {
-      setIsValid(false);
-    }
-    // (emailValidation && password.length >= minLength) ? setIsValid(true) : setIsValid(false);
-  };
-
-  const handleChange = ({ target }) => {
-    const { name, value } = target;
-
-    switch (name) {
-    case 'email':
-      setEmail(value);
-      break;
-    case 'password':
-      setPassword(value);
-      break;
-    case 'name':
-      setCompleteName(value);
-      break;
-    default:
-      break;
-    }
-  };
-
   useEffect(() => {
-    validateForms();
-  }, [email, password, completeName]);
+    const data = dataValidate(fields);
+    setIsValid((data.name && data.email && data.password));
+  }, [fields]);
+
+  const history = useHistory();
+  const handleClick = () => {
+    if (isValid) {
+      history.push('/login');
+    }
+  };
 
   return (
     <div
@@ -108,6 +65,11 @@ function Register() {
               type="name"
               name="name"
               id="name"
+              placeholder="Seu nome"
+              required=""
+              data-testid="common_register__input-name"
+              value={ fields.name }
+              onChange={ setFormFields }
               className="bg-gray-50 border
                       border-gray-300 text-gray-900 sm:text-sm rounded-lg
                       focus:ring-primary-600
@@ -118,10 +80,6 @@ function Register() {
                       dark:text-white
                       dark:focus:ring-blue-500
                       dark:focus:border-blue-500"
-              placeholder="Seu nome"
-              required=""
-              data-testid="common_register__input-name"
-              onChange={ (e) => handleChange(e) }
             />
           </label>
           <label
@@ -135,6 +93,10 @@ function Register() {
               name="email"
               id="email"
               placeholder="seu-email@site.com.br"
+              required=""
+              data-testid="common_register__input-email"
+              value={ fields.email }
+              onChange={ setFormFields }
               className="bg-gray-50
                     border border-gray-300
                     text-gray-900 sm:text-sm rounded-lg
@@ -147,9 +109,6 @@ function Register() {
                     dark:text-white
                     dark:focus:ring-blue-500
                     dark:focus:border-blue-500"
-              required=""
-              data-testid="common_register__input-email"
-              onChange={ (e) => handleChange(e) }
             />
           </label>
           <label
@@ -164,6 +123,10 @@ function Register() {
               name="password"
               id="password"
               placeholder="••••••••"
+              required=""
+              data-testid="common_register__input-password"
+              value={ fields.password }
+              onChange={ setFormFields }
               className="bg-gray-50 border
                     border-gray-300
                     text-gray-900 sm:text-sm
@@ -177,13 +140,13 @@ function Register() {
                     dark:text-white
                     dark:focus:ring-blue-500
                     dark:focus:border-blue-500"
-              required=""
-              data-testid="common_register__input-password"
-              onChange={ (e) => handleChange(e) }
             />
           </label>
           <button
             type="button"
+            data-testid="common_register__button-register"
+            disabled={ !isValid }
+            onClick={ handleClick }
             className="flex items-center
             justify-center
             h-12
@@ -196,8 +159,6 @@ function Register() {
             text-sm
             text-blue-100
             hover:bg-blue-700"
-            data-testid="common_register__button-register"
-            disabled={ !isValid }
           >
             Create an account
           </button>
@@ -217,9 +178,7 @@ function Register() {
           </p>
           {
             !isValid ? (
-              <p
-                data-testid="common_register__element-invalid_register"
-              >
+              <p data-testid="common_register__element-invalid_register">
                 Dados Inválidos
               </p>
             )
