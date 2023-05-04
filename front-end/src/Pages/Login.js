@@ -60,6 +60,10 @@ function Login() {
           />
         </label>
         <button
+          type="button"
+          disabled={ !isValid }
+          onClick={ handleClick }
+          data-testid="common_login__button-login"
           className="flex items-center
           justify-center
           h-12
@@ -72,10 +76,6 @@ function Login() {
           text-sm
           text-blue-100
           hover:bg-blue-700"
-          type="button"
-          disabled={ !isValid }
-          onClick={ handleClick }
-          data-testid="common_login__button-login"
         >
           Login
         </button>

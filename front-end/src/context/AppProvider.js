@@ -8,7 +8,7 @@ function AppProvider({ children }) {
   const [fields, setFormFields] = useForm({
     email: '',
     password: '',
-    completeName: '',
+    name: '',
   });
 
   const values = useMemo(() => ({
