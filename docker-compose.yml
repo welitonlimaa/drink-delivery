@@ -43,3 +43,21 @@ services:
       retries: 5
     cap_add:
       - SYS_NICE
+  # frontend:
+  #   container_name: delivery-frontend
+  #   build: ./front-end
+  #   ports:
+  #     - 3000:3000
+  #   platform: linux/x86_64
+  #   working_dir: /front-end
+  #   depends_on:
+  #     backend:
+  #       condition: service_healthy
+  #   # Os `healthcheck` devem garantir que a aplicação
+  #   # está operacional, antes de liberar o container
+  #   volumes:
+  #     - ./front-end/src:/front-end/src
+  #   healthcheck:
+  #     test: ["CMD", "lsof", "-t", "-i:3000"]  # Caso utilize outra porta interna para o front, altere ela aqui também
+  #     timeout: 10s
+  #     retries: 5
