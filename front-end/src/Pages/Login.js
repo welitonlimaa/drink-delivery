@@ -16,7 +16,7 @@ function Login() {
   const history = useHistory();
   const handleClick = () => {
     if (isValid) {
-      history.push('/register');
+      history.push('/customer/products');
     }
   };
 
