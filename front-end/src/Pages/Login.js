@@ -52,7 +52,9 @@ function Login() {
   }, [email, password]);
 
   const handleClick = () => {
-    history.push('/register');
+    if (isValid) {
+      history.push('/register');
+    }
   };
 
   return (
@@ -108,6 +110,7 @@ function Login() {
           text-blue-100
           hover:bg-blue-700"
           type="button"
+          disabled={ !isValid }
           onClick={ handleClick }
           data-testid="common_login__button-login"
         >
@@ -119,7 +122,7 @@ function Login() {
             to="/register"
             data-testid="common_login__button-register"
           >
-            Sign Up
+            Ainda não tenho conta
           </Link>
         </div>
         {

@@ -27,9 +27,13 @@ function Register() {
       emailValidation = false;
     }
 
-    const minLength = 6;
+    const minpassWord = 6;
 
-    if (emailValidation && password.length >= minLength) {
+    const minName = 12;
+
+    if (emailValidation
+      && password.length >= minpassWord
+      && completeName.length >= minName) {
       setIsValid(true);
     } else {
       setIsValid(false);
@@ -57,7 +61,7 @@ function Register() {
 
   useEffect(() => {
     validateForms();
-  }, [email, password]);
+  }, [email, password, completeName]);
 
   return (
     <div
@@ -179,7 +183,7 @@ function Register() {
             />
           </label>
           <button
-            type="submit"
+            type="button"
             className="flex items-center
             justify-center
             h-12
@@ -193,6 +197,7 @@ function Register() {
             text-blue-100
             hover:bg-blue-700"
             data-testid="common_register__button-register"
+            disabled={ !isValid }
           >
             Create an account
           </button>
@@ -210,6 +215,16 @@ function Register() {
               Login here
             </Link>
           </p>
+          {
+            !isValid ? (
+              <p
+                data-testid="common_register__element-invalid_register"
+              >
+                Dados Inválidos
+              </p>
+            )
+              : null
+          }
         </form>
       </div>
     </div>
