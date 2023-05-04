@@ -9,23 +9,24 @@ function Register() {
       flex flex-col items-center
       justify-center px-6 py-8 mx-auto md:h-screen lg:py-0
           w-full
+          h-full
         bg-white rounded-lg
           shadow dark:border
           dark:bg-gray-800
           dark:border-gray-700"
     >
-      <Link
-        to="/login"
-        className="flex items-center mb-6 text-2xl
+      <div className="p-6 space-y-4 md:space-y-6 sm:p-8 shadow-lg shadow-gray-500">
+        <Link
+          to="/login"
+          className="flex items-center
+          text-2xl
           font-semibol
           text-gray-900
           dark:text-white
-          h-50
           "
-      >
-        <img className="w-200 mr-2" src={ logo } alt="logo" />
-      </Link>
-      <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+        >
+          <img className="w-200 mx-auto" src={ logo } alt="logo" />
+        </Link>
         <h1
           className="text-xl font-bold leading-tight
               tracking-tight text-gray-900 md:text-2xl dark:text-white"
@@ -148,14 +149,18 @@ function Register() {
           </div>
           <button
             type="submit"
-            className="w-full
-                text-white bg-primary-600
-                hover:bg-primary-700
-                focus:ring-4 focus:outline-none
-                focus:ring-primary-300 font-medium
-                rounded-lg text-sm px-5 py-2.5 text-center
-                dark:bg-primary-600 dark:hover:bg-primary-700
-                dark:focus:ring-primary-800"
+            className="flex items-center
+            justify-center
+            h-12
+            px-6
+            w-64
+            bg-blue-600
+            mt-8
+            rounded
+            font-semibold
+            text-sm
+            text-blue-100
+            hover:bg-blue-700"
           >
             Create an account
           </button>
