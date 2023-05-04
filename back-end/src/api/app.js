@@ -1,9 +1,14 @@
 const express = require('express');
+const { registerRoute, loginRoute, productRoutes } = require('../routers');
 
 const app = express();
 app.use(express.json());
 
-app.use('/login', userRoutes);
+app.use('/login', loginRoute);
+
+app.use('/register', registerRoute);
+
+app.use('/products', productRoutes);
 
 app.get('/coffee', (_req, res) => res.status(418).end());
 
