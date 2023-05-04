@@ -1,32 +1,29 @@
 import React, { useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import AppContext from './AppContext';
+import useForm from '../hooks/useForm';
 
 function AppProvider({ children }) {
   const [isLoading, setIsLoading] = useState(true);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [completeName, setCompleteName] = useState('');
+  const [fields, setFormFields] = useForm({
+    email: '',
+    password: '',
+    completeName: '',
+  });
 
   const values = useMemo(() => ({
-    email,
-    setEmail,
-    password,
-    setPassword,
-    completeName,
-    setCompleteName,
+    fields,
+    setFormFields,
     isLoading,
     setIsLoading,
   }), [
     isLoading,
-    email,
-    password,
-    completeName,
+    fields,
   ]);
 
   return (
     <AppContext.Provider value={ values }>
-      { children }
+      {children}
     </AppContext.Provider>
   );
 }

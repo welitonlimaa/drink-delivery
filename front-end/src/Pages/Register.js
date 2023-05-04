@@ -4,64 +4,20 @@ import logo from '../images/logo.png';
 import AppContext from '../context/AppContext';
 
 function Register() {
-  const {
-    email,
-    setEmail,
-    password,
-    setPassword,
-    completeName,
-    setCompleteName,
-  } = useContext(AppContext);
+  const { fields, setFormFields } = useContext(AppContext);
   const [isValid, setIsValid] = useState(false);
 
-  const validateForms = () => {
-    let emailValidation = false;
-
-    // the email validation was found at:
-    // https://www.simplilearn.com/tutorials/javascript-tutorial/email-validation-in-javascript
-    const regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-
-    if (email.match(regex) && email.includes('.')) {
-      emailValidation = true;
-    } else {
-      emailValidation = false;
-    }
-
-    const minpassWord = 6;
-
-    const minName = 12;
-
-    if (emailValidation
-      && password.length >= minpassWord
-      && completeName.length >= minName) {
-      setIsValid(true);
-    } else {
-      setIsValid(false);
-    }
-    // (emailValidation && password.length >= minLength) ? setIsValid(true) : setIsValid(false);
-  };
-
-  const handleChange = ({ target }) => {
-    const { name, value } = target;
-
-    switch (name) {
-    case 'email':
-      setEmail(value);
-      break;
-    case 'password':
-      setPassword(value);
-      break;
-    case 'name':
-      setCompleteName(value);
-      break;
-    default:
-      break;
-    }
-  };
-
   useEffect(() => {
-    validateForms();
-  }, [email, password, completeName]);
+    const data = dataValidate(fields);
+    setIsValid((data.email && data.password));
+  }, [fields]);
+
+  const history = useHistory();
+  const handleClick = () => {
+    if (isValid) {
+      history.push('/register');
+    }
+  };
 
   return (
     <div
@@ -135,6 +91,9 @@ function Register() {
               name="email"
               id="email"
               placeholder="seu-email@site.com.br"
+              required=""
+              data-testid="common_register__input-email"
+              onChange={ (e) => handleChange(e) }
               className="bg-gray-50
                     border border-gray-300
                     text-gray-900 sm:text-sm rounded-lg
@@ -147,9 +106,6 @@ function Register() {
                     dark:text-white
                     dark:focus:ring-blue-500
                     dark:focus:border-blue-500"
-              required=""
-              data-testid="common_register__input-email"
-              onChange={ (e) => handleChange(e) }
             />
           </label>
           <label
