@@ -15,7 +15,7 @@ function Register() {
           dark:bg-gray-800
           dark:border-gray-700"
     >
-      <div className="p-6 space-y-4 md:space-y-6 sm:p-8 shadow-lg shadow-gray-500">
+      <div className="p-6 space-y-4 md:space-y-6 sm:p-8 shadow-lg shadow-transparent-500">
         <Link
           to="/login"
           className="flex items-center
@@ -25,7 +25,7 @@ function Register() {
           dark:text-white
           "
         >
-          <img className="w-200 mx-auto" src={ logo } alt="logo" />
+          <img className="w-150 mx-auto" src={ logo } alt="logo" />
         </Link>
         <h1
           className="text-xl font-bold leading-tight
