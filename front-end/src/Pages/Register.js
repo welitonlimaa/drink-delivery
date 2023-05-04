@@ -1,8 +1,64 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../images/logo.png';
+import AppContext from '../context/AppContext';
 
 function Register() {
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    completeName,
+    setCompleteName,
+  } = useContext(AppContext);
+  const [isValid, setIsValid] = useState(false);
+
+  const validateForms = () => {
+    let emailValidation = false;
+
+    // the email validation was found at:
+    // https://www.simplilearn.com/tutorials/javascript-tutorial/email-validation-in-javascript
+    const regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+    if (email.match(regex) && email.includes('.')) {
+      emailValidation = true;
+    } else {
+      emailValidation = false;
+    }
+
+    const minLength = 6;
+
+    if (emailValidation && password.length >= minLength) {
+      setIsValid(true);
+    } else {
+      setIsValid(false);
+    }
+    // (emailValidation && password.length >= minLength) ? setIsValid(true) : setIsValid(false);
+  };
+
+  const handleChange = ({ target }) => {
+    const { name, value } = target;
+
+    switch (name) {
+    case 'email':
+      setEmail(value);
+      break;
+    case 'password':
+      setPassword(value);
+      break;
+    case 'name':
+      setCompleteName(value);
+      break;
+    default:
+      break;
+    }
+  };
+
+  useEffect(() => {
+    validateForms();
+  }, [email, password]);
+
   return (
     <div
       className="
@@ -28,23 +84,26 @@ function Register() {
           <img className="w-150 mx-auto" src={ logo } alt="logo" />
         </Link>
         <h1
-          className="text-xl font-bold leading-tight
-              tracking-tight text-gray-900 md:text-2xl dark:text-white"
+          className="text-xl
+          font-bold leading-tight
+          tracking-tight
+          text-gray-900 md:text-2xl
+          dark:text-white"
         >
-          Create and account
+          Cadastro
         </h1>
         <form className="space-y-4 md:space-y-6" action="#">
           <label
-            htmlFor="email"
+            htmlFor="name"
             className="block mb-2 text-sm font-medium
                   text-gray-900
                   dark:text-white"
           >
-            Your email
+            Nome
             <input
-              type="email"
-              name="email"
-              id="email"
+              type="name"
+              name="name"
+              id="name"
               className="bg-gray-50 border
                       border-gray-300 text-gray-900 sm:text-sm rounded-lg
                       focus:ring-primary-600
@@ -55,21 +114,23 @@ function Register() {
                       dark:text-white
                       dark:focus:ring-blue-500
                       dark:focus:border-blue-500"
-              placeholder="name@company.com"
+              placeholder="Seu nome"
               required=""
+              data-testid="common_register__input-name"
+              onChange={ (e) => handleChange(e) }
             />
           </label>
           <label
-            htmlFor="password"
+            htmlFor="email"
             className="block mb-2 text-sm font-medium
                   text-gray-900 dark:text-white"
           >
-            Password
+            Email
             <input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="••••••••"
+              type="email"
+              name="email"
+              id="email"
+              placeholder="seu-email@site.com.br"
               className="bg-gray-50
                     border border-gray-300
                     text-gray-900 sm:text-sm rounded-lg
@@ -83,19 +144,21 @@ function Register() {
                     dark:focus:ring-blue-500
                     dark:focus:border-blue-500"
               required=""
+              data-testid="common_register__input-email"
+              onChange={ (e) => handleChange(e) }
             />
           </label>
           <label
-            htmlFor="confirm-password"
+            htmlFor="password"
             className="block mb-2 text-sm font-medium
                   text-gray-900
                   dark:text-white"
           >
-            Confirm password
+            Senha
             <input
-              type="confirm-password"
-              name="confirm-password"
-              id="confirm-password"
+              type="password"
+              name="password"
+              id="password"
               placeholder="••••••••"
               className="bg-gray-50 border
                     border-gray-300
@@ -111,42 +174,10 @@ function Register() {
                     dark:focus:ring-blue-500
                     dark:focus:border-blue-500"
               required=""
+              data-testid="common_register__input-password"
+              onChange={ (e) => handleChange(e) }
             />
           </label>
-          <div className="flex items-start">
-            <input
-              id="terms"
-              aria-describedby="terms"
-              type="checkbox"
-              className="w-4 h-4 border
-                    border-gray-300 rounded
-                    bg-gray-50 focus:ring-3
-                    focus:ring-primary-300
-                    dark:bg-gray-700
-                    dark:border-gray-600
-                    dark:focus:ring-primary-600
-                    dark:ring-offset-gray-800"
-              required=""
-            />
-            <label
-              htmlFor="terms"
-              className="font-light
-                    text-gray-500
-                    dark:text-gray-300"
-            >
-              I accept the
-              {' '}
-            </label>
-            <Link
-              className="
-                font-medium text-primary-600
-                hover:underline dark:text-primary-500
-                text-gray-500"
-              to="/login"
-            >
-              Terms and Conditions
-            </Link>
-          </div>
           <button
             type="submit"
             className="flex items-center
@@ -161,6 +192,7 @@ function Register() {
             text-sm
             text-blue-100
             hover:bg-blue-700"
+            data-testid="common_register__button-register"
           >
             Create an account
           </button>

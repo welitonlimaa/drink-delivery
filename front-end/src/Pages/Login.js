@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import AppContext from '../context/AppContext';
 import logo from '../images/logo.png';
@@ -6,6 +6,31 @@ import logo from '../images/logo.png';
 function Login() {
   const { email, setEmail, password, setPassword } = useContext(AppContext);
   const history = useHistory();
+
+  const [isValid, setIsValid] = useState(false);
+
+  const validateForms = () => {
+    let emailValidation = false;
+
+    // the email validation was found at:
+    // https://www.simplilearn.com/tutorials/javascript-tutorial/email-validation-in-javascript
+    const regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+    if (email.match(regex) && email.includes('.')) {
+      emailValidation = true;
+    } else {
+      emailValidation = false;
+    }
+
+    const minLength = 6;
+
+    if (emailValidation && password.length >= minLength) {
+      setIsValid(true);
+    } else {
+      setIsValid(false);
+    }
+    // (emailValidation && password.length >= minLength) ? setIsValid(true) : setIsValid(false);
+  };
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
@@ -21,6 +46,10 @@ function Login() {
       break;
     }
   };
+
+  useEffect(() => {
+    validateForms();
+  }, [email, password]);
 
   const handleClick = () => {
     history.push('/register');
@@ -46,6 +75,7 @@ function Login() {
             name="email"
             value={ email }
             onChange={ (e) => handleChange(e) }
+            data-testid="common_login__input-email"
           />
         </label>
         <label
@@ -61,6 +91,7 @@ function Login() {
             id="password-input"
             value={ password }
             onChange={ (e) => handleChange(e) }
+            data-testid="common_login__input-password"
           />
         </label>
         <button
@@ -78,6 +109,7 @@ function Login() {
           hover:bg-blue-700"
           type="button"
           onClick={ handleClick }
+          data-testid="common_login__button-login"
         >
           Login
         </button>
@@ -85,10 +117,16 @@ function Login() {
           <Link
             className="text-blue-400 hover:text-blue-500"
             to="/register"
+            data-testid="common_login__button-register"
           >
             Sign Up
           </Link>
         </div>
+        {
+          !isValid
+            ? <p data-testid="common_login__element-invalid-email">Dados Inválidos</p>
+            : null
+        }
       </form>
     </div>
   );
