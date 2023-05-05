@@ -1,23 +1,30 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { Redirect, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import AppContext from '../context/AppContext';
 import logo from '../images/logo.png';
 import dataValidate from '../utils/dataValidate';
+import { requestLogin } from '../services/requests';
 
 function Login() {
   const { fields, setFormFields } = useContext(AppContext);
   const [isValid, setIsValid] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
+  const [unauthorized, changeAuthorized] = useState(false);
 
-  const login = async (event) => {
-    event.preventDefault();
+  const login = async (e) => {
+    e.preventDefault();
 
     try {
-      const { token } = await requestLogin('/login', { email, password });
+      const { token } = await requestLogin(
+        '/login',
+        { email: fields.email, password: fields.password },
+      );
       console.log(token);
       setIsLogged(true);
     } catch (error) {
-      isValid(false);
+      setIsValid(false);
+      changeAuthorized(true);
+      console.log(error);
     }
   };
 
@@ -26,12 +33,12 @@ function Login() {
     setIsValid((data.email && data.password));
   }, [fields]);
 
-  if (isLogged) return <Navigate to="/matches" />;
-
   const history = useHistory();
   const handleClick = (endpoint) => {
     history.push(endpoint);
   };
+
+  if (isLogged) return <Redirect to="/customer/products" />;
 
   return (
     <div className="flex justify-center">
@@ -75,7 +82,7 @@ function Login() {
         <button
           type="button"
           disabled={ !isValid }
-          onClick={ () => handleClick('/customer/products') }
+          onClick={ (e) => login(e) }
           data-testid="common_login__button-login"
           className="flex items-center justify-center h-12 px-6 w-64 bg-blue-600
           mt-8 rounded font-semibold text-sm text-blue-100 hover:bg-blue-700"
@@ -94,7 +101,7 @@ function Login() {
           </button>
         </div>
         {
-          !isValid
+          unauthorized
             ? <p data-testid="common_login__element-invalid-email">Dados Inválidos</p>
             : null
         }

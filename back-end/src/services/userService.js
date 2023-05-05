@@ -10,10 +10,10 @@ const login = async ({ email, password }) => {
 
   const user = await Users.findOne({ where: { email } });
   const invalid = 'Invalid email or password';
-  if (!user) return { type: 401, message: { message: invalid } };
+  if (!user) return { type: 404, message: { message: invalid } };
 
   const compare = md5(password) === user.password;
-  if (!compare) return { type: 401, message: { message: invalid } };
+  if (!compare) return { type: 404, message: { message: invalid } };
 
   const { name, role } = user;
 
