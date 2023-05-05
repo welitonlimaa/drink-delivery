@@ -20,6 +20,7 @@ function Products() {
       {
         products.map(({ name, price, urlImage }, index) => (<ProductCard
           key={ index }
+          id={ index }
           urlImage={ urlImage }
           name={ name }
           price={ price }
