@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Register from '../Pages/Register';
 import Login from '../Pages/Login';
-import Products from '../Pages/Products';
+import CostumerProducts from '../Pages/CostumerProducts';
 
 function Routes() {
   return (
@@ -12,7 +12,7 @@ function Routes() {
         <Redirect to="/login" />
       </Route>
       <Route path="/register" component={ Register } />
-      <Route path="/customer/products" component={ Products } />
+      <Route path="/customer/products" component={ CostumerProducts } />
     </Switch>
   );
 }

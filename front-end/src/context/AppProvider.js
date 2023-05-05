@@ -6,6 +6,7 @@ import useLocalStorage from '../hooks/useLocalStorage';
 
 function AppProvider({ children }) {
   const [isLoading, setIsLoading] = useState(true);
+  const [products, setProducts] = useState([]);
   const [userData, setUserData] = useLocalStorage('user', {});
   const [fields, setFormFields] = useForm({
     email: '',
@@ -20,12 +21,16 @@ function AppProvider({ children }) {
     setIsLoading,
     userData,
     setUserData,
+    products,
+    setProducts,
   }), [
     isLoading,
     fields,
     setFormFields,
     userData,
     setUserData,
+    products,
+    setProducts,
   ]);
 
   return (
