@@ -4,14 +4,12 @@ import AppContext from '../context/AppContext';
 import logo from '../images/logo.png';
 import dataValidate from '../utils/dataValidate';
 import { requestLogin } from '../services/requests';
-import useLocalStorage from '../hooks/useLocalStorage';
 
 function Login() {
-  const { fields, setFormFields } = useContext(AppContext);
+  const { fields, setFormFields, setUserData } = useContext(AppContext);
   const [isValid, setIsValid] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
   const [unauthorized, changeAuthorized] = useState(false);
-  const [, setUserData] = useLocalStorage('user', {});
 
   const login = async (e) => {
     e.preventDefault();

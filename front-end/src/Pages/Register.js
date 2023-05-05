@@ -4,14 +4,12 @@ import logo from '../images/logo.png';
 import AppContext from '../context/AppContext';
 import dataValidate from '../utils/dataValidate';
 import { createUser } from '../services/requests';
-import useLocalStorage from '../hooks/useLocalStorage';
 
 function Register() {
-  const { fields, setFormFields } = useContext(AppContext);
+  const { fields, setFormFields, setUserData } = useContext(AppContext);
   const [isValid, setIsValid] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
   const [unauthorized, changeAuthorized] = useState(false);
-  const [, setUserData] = useLocalStorage('user', {});
 
   const register = async (e) => {
     e.preventDefault();
