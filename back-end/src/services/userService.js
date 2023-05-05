@@ -41,7 +41,7 @@ const register = async ({ name, email, password, role }) => {
   if (userVerify) return { type: 409, message: { message: 'Conflict!' } };
 
   await Users.create({ name, email, password: md5(password), role });
-
+  
   return { type: 201, message: 'Created!' };
 };
 

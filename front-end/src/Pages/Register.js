@@ -1,24 +1,41 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import logo from '../images/logo.png';
 import AppContext from '../context/AppContext';
 import dataValidate from '../utils/dataValidate';
+import { createUser } from '../services/requests';
 
 function Register() {
   const { fields, setFormFields } = useContext(AppContext);
   const [isValid, setIsValid] = useState(false);
+  const [isLogged, setIsLogged] = useState(false);
+  const [unauthorized, changeAuthorized] = useState(false);
+
+  const register = async (e) => {
+    e.preventDefault();
+
+    try {
+      await createUser(
+        '/register',
+        {
+          email: fields.email,
+          password: fields.password,
+          name: fields.name,
+          role: 'customer' },
+      );
+      setIsLogged(true);
+    } catch (error) {
+      setIsValid(false);
+      changeAuthorized(true);
+    }
+  };
 
   useEffect(() => {
     const data = dataValidate(fields);
     setIsValid((data.name && data.email && data.password));
   }, [fields]);
 
-  const history = useHistory();
-  const handleClick = () => {
-    if (isValid) {
-      history.push('/login');
-    }
-  };
+  if (isLogged) return <Redirect to="/customer/products" />;
 
   return (
     <div
@@ -105,7 +122,7 @@ function Register() {
           <button
             type="button"
             disabled={ !isValid }
-            onClick={ handleClick }
+            onClick={ (e) => register(e) }
             data-testid="common_register__button-register"
             className="flex items-center justify-center h-12 px-6 w-64 bg-blue-600 mt-8
             rounded font-semibold text-sm text-blue-100 hover:bg-blue-700"
@@ -124,7 +141,7 @@ function Register() {
             </Link>
           </p>
           {
-            !isValid ? (
+            unauthorized ? (
               <p data-testid="common_register__element-invalid_register">
                 Dados Inválidos
               </p>
