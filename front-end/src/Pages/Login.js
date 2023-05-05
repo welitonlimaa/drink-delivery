@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Link, useHistory, Navigate } from 'react-router-dom/cjs/react-router-dom.min';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import AppContext from '../context/AppContext';
 import logo from '../images/logo.png';
 import dataValidate from '../utils/dataValidate';
@@ -29,10 +29,8 @@ function Login() {
   if (isLogged) return <Navigate to="/matches" />;
 
   const history = useHistory();
-  const handleClick = () => {
-    if (isValid) {
-      history.push('/customer/products');
-    }
+  const handleClick = (endpoint) => {
+    history.push(endpoint);
   };
 
   return (
@@ -77,7 +75,7 @@ function Login() {
         <button
           type="button"
           disabled={ !isValid }
-          onClick={ handleClick }
+          onClick={ () => handleClick('/customer/products') }
           data-testid="common_login__button-login"
           className="flex items-center justify-center h-12 px-6 w-64 bg-blue-600
           mt-8 rounded font-semibold text-sm text-blue-100 hover:bg-blue-700"
@@ -85,13 +83,15 @@ function Login() {
           Login
         </button>
         <div className="flex mt-6 justify-center text-xs">
-          <Link
+          <button
             className="text-blue-400 hover:text-blue-500"
-            to="/register"
+            name="register"
+            onClick={ () => handleClick('/register') }
             data-testid="common_login__button-register"
+            type="button"
           >
             Ainda não tenho conta
-          </Link>
+          </button>
         </div>
         {
           !isValid
