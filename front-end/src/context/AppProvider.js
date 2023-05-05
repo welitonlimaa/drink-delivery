@@ -19,6 +19,7 @@ function AppProvider({ children }) {
   }), [
     isLoading,
     fields,
+    setFormFields,
   ]);
 
   return (
