@@ -1,9 +1,9 @@
 import Products from '../components/Products';
 
-function CostumerProducts() {
+function CustomerProducts() {
   return (
     <Products />
   );
 }
 
-export default CostumerProducts;
+export default CustomerProducts;
