@@ -4,18 +4,20 @@ import logo from '../images/logo.png';
 import AppContext from '../context/AppContext';
 import dataValidate from '../utils/dataValidate';
 import { createUser } from '../services/requests';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 function Register() {
   const { fields, setFormFields } = useContext(AppContext);
   const [isValid, setIsValid] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
   const [unauthorized, changeAuthorized] = useState(false);
+  const [, setUserData] = useLocalStorage('user', {});
 
   const register = async (e) => {
     e.preventDefault();
 
     try {
-      await createUser(
+      const data = await createUser(
         '/register',
         {
           email: fields.email,
@@ -23,6 +25,7 @@ function Register() {
           name: fields.name,
           role: 'customer' },
       );
+      setUserData(data);
       setIsLogged(true);
     } catch (error) {
       setIsValid(false);
@@ -39,9 +42,8 @@ function Register() {
 
   return (
     <div
-      className="
-      flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0
-      w-full h-full bg-white rounded-lg shadow dark:border dark:bg-gray-800
+      className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen
+      lg:py-0 w-full h-full bg-white rounded-lg shadow dark:border dark:bg-gray-800
       dark:border-gray-700"
     >
       <div className="p-6 space-y-4 md:space-y-6 sm:p-8 shadow-lg shadow-transparent-500">
