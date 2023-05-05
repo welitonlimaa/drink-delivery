@@ -15,9 +15,7 @@ function Login() {
 
   const history = useHistory();
   const handleClick = (endpoint) => {
-    if (isValid) {
-      history.push(endpoint);
-    }
+    history.push(endpoint);
   };
 
   return (
