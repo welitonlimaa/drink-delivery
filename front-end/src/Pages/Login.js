@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link, useHistory, Navigate } from 'react-router-dom/cjs/react-router-dom.min';
 import AppContext from '../context/AppContext';
 import logo from '../images/logo.png';
 import dataValidate from '../utils/dataValidate';
@@ -7,11 +7,26 @@ import dataValidate from '../utils/dataValidate';
 function Login() {
   const { fields, setFormFields } = useContext(AppContext);
   const [isValid, setIsValid] = useState(false);
+  const [isLogged, setIsLogged] = useState(false);
+
+  const login = async (event) => {
+    event.preventDefault();
+
+    try {
+      const { token } = await requestLogin('/login', { email, password });
+      console.log(token);
+      setIsLogged(true);
+    } catch (error) {
+      isValid(false);
+    }
+  };
 
   useEffect(() => {
     const data = dataValidate(fields);
     setIsValid((data.email && data.password));
   }, [fields]);
+
+  if (isLogged) return <Navigate to="/matches" />;
 
   const history = useHistory();
   const handleClick = () => {
