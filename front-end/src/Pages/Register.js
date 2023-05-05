@@ -26,6 +26,7 @@ function Register() {
           role: 'customer' },
       );
       setUserData(data);
+      console.log(data);
       setIsLogged(true);
     } catch (error) {
       setIsValid(false);
