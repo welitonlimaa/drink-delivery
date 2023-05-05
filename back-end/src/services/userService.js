@@ -41,8 +41,10 @@ const register = async ({ name, email, password, role }) => {
   if (userVerify) return { type: 409, message: { message: 'Conflict!' } };
 
   await Users.create({ name, email, password: md5(password), role });
+
+  const token = createToken({ name, email, role });
   
-  return { type: 201, message: 'Created!' };
+  return { type: 201, message: { name, email, role, token } };
 };
 
 module.exports = {
