@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const { registerRoute, loginRoute, productRoutes } = require('../routers');
 
 const app = express();
@@ -7,6 +8,8 @@ const app = express();
 app.use(cors({
   origin: '*',
 }));
+
+app.use(express.static(path.join(__dirname, '../../public')));
 
 app.use(express.json());
 

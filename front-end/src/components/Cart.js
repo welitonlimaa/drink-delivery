@@ -12,7 +12,7 @@ function Cart() {
     }, 0);
     setTotal(sumProducts);
   };
-
+  console.log('cart =>>', productsCart);
   useEffect(() => {
     sum();
   }, [productsCart, total]);

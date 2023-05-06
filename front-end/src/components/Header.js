@@ -4,6 +4,11 @@ import { Link } from 'react-router-dom';
 function Header() {
   const user = JSON.parse(localStorage.getItem('user'));
   const { role, name } = user;
+
+  const clearLocalStorage = () => {
+    localStorage.clear();
+  };
+
   return (
     <header>
       <nav
@@ -66,6 +71,7 @@ function Header() {
         </span>
         <Link
           to="/login"
+          onClick={ clearLocalStorage }
           className="p-3 flex items-center bg-blue-600 h-full text-sm"
           data-testid="customer_products__element-navbar-link-logout"
         >
