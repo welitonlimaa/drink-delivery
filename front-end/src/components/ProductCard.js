@@ -1,9 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 // import minus from '../images/svg/minus.svg';
 // import plus from '../images/svg/plus.svg';
 
-function ProductCard({ id, urlImage, name, price }) {
+function ProductCard({ id, urlImage, name, price, quantity, updateProductCart }) {
+  const [productQuantity, setProductQuantity] = useState(quantity);
+
+  const minus = () => {
+    const number = Number(productQuantity);
+    if (number === 0) return setProductQuantity(0);
+    setProductQuantity(number - 1);
+  };
+
+  const plus = () => {
+    const number = Number(productQuantity);
+    setProductQuantity(number + 1);
+  };
+
+  useEffect(() => {
+    updateProductCart({ id, urlImage, name, price, productQuantity });
+  }, [productQuantity]);
+
   return (
     <div
       className="w-80 bg-white shadow rounded"
@@ -13,9 +30,9 @@ function ProductCard({ id, urlImage, name, price }) {
         p-4 bg-cover bg-center"
       >
         <img
-          data-testid={ `customer_products__img-card-bg-image-${id}` }
           src={ urlImage }
           alt={ name }
+          data-testid={ `customer_products__img-card-bg-image-${id}` }
         />
       </div>
       <div className="p-4 flex flex-col items-center">
@@ -34,6 +51,7 @@ function ProductCard({ id, urlImage, name, price }) {
         <div className="inline-flex items-center mt-2">
           <button
             type="button"
+            onClick={ minus }
             data-testid={ `customer_products__button-card-rm-item-${id}` }
             className="bg-white rounded-l border text-gray-600
             hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50
@@ -42,13 +60,17 @@ function ProductCard({ id, urlImage, name, price }) {
             -
           </button>
           <input
+            type="number"
+            value={ productQuantity }
+            onChange={ (e) => setProductQuantity(e.target.value) }
+            min="0"
             data-testid={ `customer_products__input-card-quantity-${id}` }
             className="bg-gray-100 border-t border-b border-gray-100 text-gray-600
             hover:bg-gray-100 inline-flex items-center px-4 py-1 select-none"
-            type="number"
           />
           <button
             type="button"
+            onClick={ plus }
             data-testid={ `customer_products__button-card-add-item-${id}` }
             className="bg-white rounded-r border text-gray-600 hover:bg-gray-100
             active:bg-gray-200 disabled:opacity-50 inline-flex items-center px-2 py-1
@@ -67,6 +89,8 @@ ProductCard.propTypes = {
   urlImage: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,
+  quantity: PropTypes.number.isRequired,
+  updateProductCart: PropTypes.func.isRequired,
 };
 
 export default ProductCard;

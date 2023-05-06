@@ -1,24 +1,44 @@
-import React from 'react';
-import Proptypes from 'prop-types';
+import React, { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import AppContext from '../context/AppContext';
 
-function Cart(props) {
-  const { total } = props;
+function Cart() {
+  const [total, setTotal] = useState(0);
+  const { productsCart } = useContext(AppContext);
+  const sum = () => {
+    const sumProducts = productsCart.reduce((acc, curr) => {
+      const value = curr.quantity * Number(curr.price);
+      return acc + value;
+    }, 0);
+    setTotal(sumProducts);
+  };
+
+  useEffect(() => {
+    sum();
+  }, [productsCart, total]);
+
+  const history = useHistory();
+  const handleClick = (endpoint) => {
+    history.push(endpoint);
+  };
+
   return (
-    <div
+    <button
+      type="button"
+      disabled={ total === 0 }
+      onClick={ () => handleClick('/customer/checkout') }
       data-testid="customer_products__button-cart"
       className="rounded bg-green-700 font-bold"
     >
-      <p>
-        Ver Carrinho: R$
-        {' '}
-        <span data-testid="customer_products__checkout-bottom-value">{ total }</span>
-      </p>
-    </div>
+      Ver Carrinho: R$
+      {' '}
+      <span
+        data-testid="customer_products__checkout-bottom-value"
+      >
+        { (total.toFixed(2)).replace(/\./, ',') }
+      </span>
+    </button>
   );
 }
-
-Cart.propTypes = {
-  total: Proptypes.number.isRequired,
-};
 
 export default Cart;
