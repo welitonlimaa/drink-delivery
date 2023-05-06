@@ -7,7 +7,7 @@ function Header() {
   return (
     <header>
       <nav
-        className="flex items-center bg-green-700 h-16 text-white font-bold uppercase"
+        className="flex items-center bg-green-700 h-16 text-white font-bold"
       >
         {
           role === 'customer'

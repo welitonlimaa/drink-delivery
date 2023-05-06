@@ -29,7 +29,7 @@ function ProductCard({ id, urlImage, name, price }) {
           data-testid={ `customer_products__element-card-price-${id}` }
           className="text-center text-gray-800 mt-1"
         >
-          { price }
+          { price.replace(/\./, ',') }
         </p>
         <div className="inline-flex items-center mt-2">
           <button
@@ -41,13 +41,12 @@ function ProductCard({ id, urlImage, name, price }) {
           >
             -
           </button>
-          <div
+          <input
             data-testid={ `customer_products__input-card-quantity-${id}` }
             className="bg-gray-100 border-t border-b border-gray-100 text-gray-600
             hover:bg-gray-100 inline-flex items-center px-4 py-1 select-none"
-          >
-            2
-          </div>
+            type="number"
+          />
           <button
             type="button"
             data-testid={ `customer_products__button-card-add-item-${id}` }
