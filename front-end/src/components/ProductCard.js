@@ -25,16 +25,12 @@ function ProductCard({ id, urlImage, name, price, quantity, updateProductCart })
     <div
       className="w-80 bg-white shadow rounded"
     >
-      <div
-        className="h-48 w-full bg-gray-200 flex flex-col justify-between
-        p-4 bg-cover bg-center"
-      >
-        <img
-          src={ urlImage }
-          alt={ name }
-          data-testid={ `customer_products__img-card-bg-image-${id}` }
-        />
-      </div>
+      <img
+        src={ urlImage }
+        alt={ name }
+        data-testid={ `customer_products__img-card-bg-image-${id}` }
+        className="w-full"
+      />
       <div className="p-4 flex flex-col items-center">
         <h1
           data-testid={ `customer_products__element-card-title-${id}` }
