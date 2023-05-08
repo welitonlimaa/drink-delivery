@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import PropTypes from 'prop-types';
+import sumTotal from '../utils/totalSum';
 
 function Cart({ productsCart }) {
   const [total, setTotal] = useState(0);
 
   const sum = () => {
-    const sumProducts = productsCart.reduce((acc, curr) => {
-      const value = curr.quantity * Number(curr.price);
-      return acc + value;
-    }, 0);
+    const sumProducts = sumTotal(productsCart);
     setTotal(sumProducts);
   };
 

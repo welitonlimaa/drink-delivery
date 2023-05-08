@@ -3,6 +3,7 @@ import AppContext from '../context/AppContext';
 import ProductCard from './ProductCard';
 import { requestData } from '../services/requests';
 import Cart from './Cart';
+import sumTotal from '../utils/totalSum';
 
 function Products() {
   const { products, setProducts } = useContext(AppContext);
@@ -39,7 +40,9 @@ function Products() {
 
   useEffect(() => {
     if (products.length === 0) getProducts();
-    localStorage.setItem('cart', JSON.stringify(productsCart));
+    const total = sumTotal(productsCart);
+    const cart = { products: productsCart, total };
+    localStorage.setItem('cart', JSON.stringify(cart));
   }, [productsCart]);
 
   return (
