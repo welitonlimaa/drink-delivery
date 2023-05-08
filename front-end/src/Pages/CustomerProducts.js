@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { isExpired } from 'react-jwt';
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
-import Cart from '../components/Cart';
 import Header from '../components/Header';
 import Products from '../components/Products';
 import AppContext from '../context/AppContext';
@@ -25,7 +24,6 @@ function CustomerProducts() {
     <main>
       <Header />
       <Products />
-      <Cart />
     </main>
   );
 }

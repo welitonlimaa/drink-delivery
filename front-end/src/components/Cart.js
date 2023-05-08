@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import AppContext from '../context/AppContext';
+import PropTypes from 'prop-types';
 
-function Cart() {
+function Cart({ productsCart }) {
   const [total, setTotal] = useState(0);
-  const { productsCart } = useContext(AppContext);
+
   const sum = () => {
     const sumProducts = productsCart.reduce((acc, curr) => {
       const value = curr.quantity * Number(curr.price);
@@ -12,7 +12,7 @@ function Cart() {
     }, 0);
     setTotal(sumProducts);
   };
-  console.log('cart =>>', productsCart);
+
   useEffect(() => {
     sum();
   }, [productsCart, total]);
@@ -40,5 +40,9 @@ function Cart() {
     </button>
   );
 }
+
+Cart.propTypes = {
+  productsCart: PropTypes.arrayOf(PropTypes.objectOf).isRequired,
+};
 
 export default Cart;

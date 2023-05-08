@@ -1,15 +1,18 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import AppContext from '../context/AppContext';
 import ProductCard from './ProductCard';
 import { requestData } from '../services/requests';
+import Cart from './Cart';
 
 function Products() {
-  const { products, setProducts, productsCart, setProductsCart } = useContext(AppContext);
+  const { products, setProducts } = useContext(AppContext);
+  const [productsCart, setProductsCart] = useState([]);
 
   const getProducts = async () => {
     const data = await requestData('/products');
     const productsData = data.map((product) => {
       product.quantity = 0;
+
       return product;
     });
     setProducts(productsData);
@@ -20,11 +23,12 @@ function Products() {
       const product = productsCart.filter((data) => data.id === id);
       if (product.length !== 0) {
         const newProductsCart = productsCart.filter((data) => data.id !== id);
-        newProductsCart.push({ id, urlImage, name, price, quantity: productQuantity });
-        return setProductsCart(newProductsCart);
+
+        return setProductsCart([...newProductsCart,
+          { id, urlImage, name, price, quantity: productQuantity }]);
       }
-      productsCart.push({ id, urlImage, name, price, quantity: productQuantity });
-      return setProductsCart(productsCart);
+      return setProductsCart([...productsCart,
+        { id, urlImage, name, price, quantity: productQuantity }]);
     }
 
     if (productQuantity === 0) {
@@ -34,22 +38,26 @@ function Products() {
   };
 
   useEffect(() => {
-    getProducts();
+    if (products.length === 0) getProducts();
+    localStorage.setItem('cart', JSON.stringify(productsCart));
   }, [productsCart]);
-  console.log(productsCart);
+
   return (
-    <div className="flex flex-wrap justify-around">
-      {
-        products.map(({ name, price, urlImage, id, quantity }, index) => (<ProductCard
-          key={ index }
-          id={ id }
-          urlImage={ urlImage }
-          name={ name }
-          price={ price }
-          quantity={ quantity }
-          updateProductCart={ updateProductCart }
-        />))
-      }
+    <div>
+      <div className="flex flex-wrap justify-around">
+        {
+          products.map(({ name, price, urlImage, id, quantity }, index) => (<ProductCard
+            key={ index }
+            id={ id }
+            urlImage={ urlImage }
+            name={ name }
+            price={ price }
+            quantity={ quantity }
+            updateProductCart={ updateProductCart }
+          />))
+        }
+      </div>
+      <Cart productsCart={ productsCart } />
     </div>
   );
 }

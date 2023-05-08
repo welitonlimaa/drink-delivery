@@ -8,7 +8,6 @@ function AppProvider({ children }) {
   const [isLoading, setIsLoading] = useState(true);
   const [products, setProducts] = useState([]);
   const [userData, setUserData] = useLocalStorage('user', {});
-  const [productsCart, setProductsCart] = useState([]);
   const [fields, setFormFields] = useForm({
     email: '',
     password: '',
@@ -24,8 +23,6 @@ function AppProvider({ children }) {
     setUserData,
     products,
     setProducts,
-    productsCart,
-    setProductsCart,
   }), [
     isLoading,
     fields,
@@ -33,9 +30,6 @@ function AppProvider({ children }) {
     userData,
     setUserData,
     products,
-    setProducts,
-    productsCart,
-    setProductsCart,
   ]);
 
   return (
