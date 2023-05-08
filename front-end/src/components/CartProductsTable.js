@@ -51,7 +51,7 @@ function CartProductsTable({ setTotal }) {
           productsCart.map(({ id, name, price, quantity }, index) => (
             <ProductTable
               key={ index }
-              item={ index + 1 }
+              item={ index }
               id={ id }
               name={ name }
               price={ price }

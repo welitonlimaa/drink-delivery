@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 function ProductTable({ item, id, name, price, quantity, remove }) {
-  const subTotal = Number(price) * quantity;
+  const subTotal = (Number(price) * Number(quantity)).toFixed(2);
   return (
     <tr className="border-b dark:border-neutral-500">
       <th
@@ -9,7 +9,7 @@ function ProductTable({ item, id, name, price, quantity, remove }) {
         data-testid={ `customer_checkout__element-order-table-item-number-${item}` }
         className="whitespace-nowrap px-6 py-4 font-medium"
       >
-        { item }
+        { item + 1 }
       </th>
       <td
         data-testid={ `customer_checkout__element-order-table-name-${item}` }
@@ -27,13 +27,13 @@ function ProductTable({ item, id, name, price, quantity, remove }) {
         data-testid={ `customer_checkout__element-order-table-unit-price-${item}` }
         className="whitespace-nowrap px-6 py-4"
       >
-        { price.replace(/\./, ',') }
+        { (Number(price).toFixed(2)).replace(/\./, ',') }
       </td>
       <td
         data-testid={ `customer_checkout__element-order-table-sub-total-${item}` }
         className="whitespace-nowrap px-6 py-4"
       >
-        { subTotal }
+        { subTotal.replace(/\./, ',') }
       </td>
       <td
         data-testid={ `customer_checkout__element-order-table-remove-${item}` }
