@@ -1,13 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import clearLocalStorage from '../utils/clearLocalStorage';
 
 function Header() {
   const user = JSON.parse(localStorage.getItem('user'));
   const { role, name } = user;
-
-  const clearLocalStorage = () => {
-    localStorage.clear();
-  };
 
   return (
     <header>
