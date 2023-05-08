@@ -1,6 +1,10 @@
 const jwt = require('jsonwebtoken');
+const path = require('path');
+const fs = require('fs');
 
-const secret = process.env.JWT_SECRET || 'naruto';
+const JWT_SECRET = path.resolve(__dirname, '../../jwt.evaluation.key');
+
+const secret = fs.readFileSync(JWT_SECRET, 'utf8');
 
 const JWT_CONFIG = {
   algorithm: 'HS256',
