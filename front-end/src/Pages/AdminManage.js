@@ -1,9 +1,9 @@
 import React from 'react';
 
-function adminManage() {
+function AdminManage() {
   return (
     <div>adminManage</div>
   );
 }
 
-export default adminManage;
+export default AdminManage;

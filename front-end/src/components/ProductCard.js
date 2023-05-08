@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-// import minus from '../images/svg/minus.svg';
-// import plus from '../images/svg/plus.svg';
 
 function ProductCard({ id, urlImage, name, price, quantity, updateProductCart }) {
   const [productQuantity, setProductQuantity] = useState(quantity);

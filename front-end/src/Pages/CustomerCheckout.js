@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../components/Header';
 
-function Checkout() {
+function CustomerCheckout() {
   return (
     <div>
       <Header />
@@ -10,4 +10,4 @@ function Checkout() {
   );
 }
 
-export default Checkout;
+export default CustomerCheckout;

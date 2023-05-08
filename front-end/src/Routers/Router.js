@@ -3,10 +3,10 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import Register from '../Pages/Register';
 import Login from '../Pages/Login';
 import CustomerProducts from '../Pages/CustomerProducts';
-import customerCheckout from '../Pages/customerCheckout';
-import sellerOrders from '../Pages/sellerOrders';
-import adminManage from '../Pages/adminManage';
-import customerOrders from '../Pages/customerOrders';
+import CustomerCheckout from '../Pages/CustomerCheckout';
+import CustomerOrders from '../Pages/CustomerOrders';
+import SellerOrders from '../Pages/SellerOrders';
+import AdminManage from '../Pages/AdminManage';
 
 function Routes() {
   return (
@@ -16,11 +16,11 @@ function Routes() {
         <Redirect to="/login" />
       </Route>
       <Route path="/register" component={ Register } />
-      <Route path="/customer/checkout" component={ customerCheckout } />
+      <Route path="/customer/checkout" component={ CustomerCheckout } />
       <Route path="/customer/products" component={ CustomerProducts } />
-      <Route path="/customer/orders" component={ customerOrders } />
-      <Route path="/seller/orders" component={ sellerOrders } />
-      <Route path="/admin/manage" component={ adminManage } />
+      <Route path="/customer/orders" component={ CustomerOrders } />
+      <Route path="/seller/orders" component={ SellerOrders } />
+      <Route path="/admin/manage" component={ AdminManage } />
     </Switch>
   );
 }
