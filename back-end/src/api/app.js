@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const { registerRoute, loginRoute, productRoutes } = require('../routers');
+const { userRoutes, loginRoute, productRoutes, saleRoutes } = require('../routers');
 
 const app = express();
 
@@ -15,9 +15,11 @@ app.use(express.json());
 
 app.use('/login', loginRoute);
 
-app.use('/register', registerRoute);
+app.use('/users', userRoutes);
 
 app.use('/products', productRoutes);
+
+app.use('/sales', saleRoutes);
 
 app.get('/coffee', (_req, res) => res.status(418).end());
 
