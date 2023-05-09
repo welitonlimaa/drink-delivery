@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import CartProductsTable from '../components/CartProductsTable';
+import FormCheckout from '../components/FormCheckout';
 
 function CustomerCheckout() {
   const [total, setTotal] = useState(0);
@@ -26,6 +27,9 @@ function CustomerCheckout() {
             { (total.toFixed(2)).replace(/\./, ',') }
           </span>
         </p>
+      </div>
+      <div className="my-8">
+        <FormCheckout />
       </div>
     </div>
   );
