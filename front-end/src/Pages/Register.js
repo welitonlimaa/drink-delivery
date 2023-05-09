@@ -16,7 +16,7 @@ function Register() {
 
     try {
       const data = await createUser(
-        '/register',
+        '/users/register',
         {
           email: fields.email,
           password: fields.password,
