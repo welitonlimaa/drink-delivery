@@ -2,19 +2,21 @@ const { newSaleSchema } = require('./validations/schemas');
 
 const { Users, Sales, SalesProducts, sequelize } = require('../database/models');
 
-const registerSalesProducts = async (products, saleId, t) => {
+const registerSalesProducts = async ({ products, saleId, t }) => {
+  console.log(saleId);
   try {
     const salesProductsData = products.map(({ productId, quantity }) => 
       ({ saleId, productId, quantity }));
 
     await SalesProducts.bulkCreate(salesProductsData, { transaction: t });
+    return { type: 201, message: 'Created!' };
   } catch (error) {
-    return error;
+    return { type: 500, message: error };
   }
 };
 
 const registerSale = async ({ saleData, userId }) => {
-  const { error: errorData } = newSaleSchema(saleData);
+  const { error: errorData } = newSaleSchema.validate(saleData);
   if (errorData) return { type: 400, message: { message: errorData.message } };
 
   const { sellerId, totalPrice, deliveryAddress, deliveryNumber, products } = saleData;
@@ -28,9 +30,10 @@ const registerSale = async ({ saleData, userId }) => {
         { userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, status: 'Pendente' },
         { transaction: t },
       );
-      await registerSalesProducts({ products, saleId: saleCreated.id, t });
 
-      return { type: 201, message: 'Created!' };
+      const registerResult = await registerSalesProducts({ products, saleId: saleCreated.id, t });
+
+      return registerResult;
     });
     return result;
   } catch (error) {
