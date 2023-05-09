@@ -15,9 +15,9 @@ const login = async ({ email, password }) => {
   const compare = md5(password) === user.password;
   if (!compare) return { type: 404, message: { message: invalid } };
 
-  const { name, role } = user;
+  const { id, name, role } = user;
 
-  const token = createToken({ name, email, role });
+  const token = createToken({ id, name, email, role });
 
   return { type: 200, message: { name, email, role, token } };
 };
@@ -40,9 +40,9 @@ const register = async ({ name, email, password, role }) => {
   });
   if (userVerify) return { type: 409, message: { message: 'Conflict!' } };
 
-  await Users.create({ name, email, password: md5(password), role });
+  const user = await Users.create({ name, email, password: md5(password), role });
 
-  const token = createToken({ name, email, role });
+  const token = createToken({ id: user.id, name, email, role });
   
   return { type: 201, message: { name, email, role, token } };
 };
