@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import Select from './Select';
 import { createSale, requestData, setToken } from '../services/requests';
 import useForm from '../hooks/useForm';
 
 function FormCheckout() {
   const [sellers, setSellers] = useState([]);
+  const history = useHistory();
   const [fields, setFormFields] = useForm({
     seller: '',
     address: '',
@@ -40,9 +41,7 @@ function FormCheckout() {
         deliveryNumber: fields.addressNumber,
         products: cartProducts,
       });
-      (
-        <Redirect to={ `/customer/orders/${result.id}` } />
-      );
+      history.push(`/customer/orders/${result.id}`);
     } catch (error) {
       console.log(error);
     }

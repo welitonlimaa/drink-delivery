@@ -2,14 +2,14 @@ const { newSaleSchema } = require('./validations/schemas');
 
 const { Users, Sales, SalesProducts, sequelize } = require('../database/models');
 
-const registerSalesProducts = async ({ products, saleId, t }) => {
-  console.log(saleId);
+const registerSalesProducts = async ({ products, saleCreated, t }) => {
+  const saleId = saleCreated.id;
   try {
     const salesProductsData = products.map(({ productId, quantity }) => 
       ({ saleId, productId, quantity }));
 
     await SalesProducts.bulkCreate(salesProductsData, { transaction: t });
-    return { type: 201, message: 'Created!' };
+    return { type: 201, message: saleCreated };
   } catch (error) {
     return { type: 500, message: error };
   }
@@ -31,7 +31,7 @@ const registerSale = async ({ saleData, userId }) => {
         { transaction: t },
       );
 
-      const registerResult = await registerSalesProducts({ products, saleId: saleCreated.id, t });
+      const registerResult = await registerSalesProducts({ products, saleCreated, t });
 
       return registerResult;
     });
