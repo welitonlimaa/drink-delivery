@@ -36,13 +36,13 @@ function ProductTable({ item, id, name, price, quantity, remove }) {
         { subTotal.replace(/\./, ',') }
       </td>
       <td
-        data-testid={ `customer_checkout__element-order-table-remove-${item}` }
         className="whitespace-nowrap px-6 py-4"
       >
         <button
           type="button"
           onClick={ () => remove(id) }
           className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+          data-testid={ `customer_checkout__element-order-table-remove-${item}` }
         >
           Remove
         </button>

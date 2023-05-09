@@ -7,10 +7,14 @@ function Select({ id, name, value, options, handleChange }) {
       name={ name }
       onChange={ handleChange }
       defaultValue={ value }
+      data-testid="customer_checkout__select-seller"
       className="min-[641px]:p-2.5 max-[640px]:w-full max-[640px]:p-4
       max-[640px]:m-1 bg-gray-50 border border-gray-300 text-gray-900
       text-lg rounded-lg"
     >
+      <option>
+        Selecione um vendedor
+      </option>
       {
         options.map((seller, index) => (
           <option
