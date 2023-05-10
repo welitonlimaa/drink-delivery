@@ -58,8 +58,20 @@ const getAll = async (userId) => {
   return orders;
 };
 
+const updateById = async (id, status) => {
+  const updatedOrder = await Sales.update({
+    status,
+  }, {
+    where: {
+      id,
+    },
+  });
+  return { type: 200, message: updatedOrder };
+};
+
 module.exports = {
   registerSale,
   getById,
   getAll,
+  updateById,
 };

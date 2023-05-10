@@ -20,8 +20,13 @@ const newSaleSchema = Joi.object({
   products: Joi.array().items({ productId: Joi.number(), quantity: Joi.number() }).min(1),
 });
 
+// const updateOrderStatus = Joi.object({
+//   status: Joi.string().required,
+// });
+
 module.exports = {
   dataLoginSchema,
   newUserSchema,
   newSaleSchema,
+  // updateOrderStatus,
 };

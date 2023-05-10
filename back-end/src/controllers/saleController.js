@@ -25,8 +25,19 @@ const getAll = async (req, res) => {
   return res.status(200).json(orders);
 };
 
+const updateById = async (req, res) => {
+  const { id } = req.params;
+
+  const { status } = req.body;
+
+  const { type, message } = await saleService.updateById(Number(id), status);
+
+  return res.status(type).json(message);
+};
+
 module.exports = {
   registerSale,
   getById,
   getAll,
+  updateById,
 };
