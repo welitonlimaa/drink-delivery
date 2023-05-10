@@ -48,8 +48,12 @@ function FormCheckout() {
   };
 
   return (
-    <form className="w-full max-w-6xl">
-      <div className="flex flex-wrap justify-center">
+    <form
+      className="w-4/5 mx-auto bg-slate-200 p-3 rounded-lg flex flex-wrap
+      justify-center gap-y-10"
+    >
+      <p className="uppercase font-bold">Detalhes e Endereço para Entrega</p>
+      <div className="flex flex-wrap justify-center w-full gap-x-10">
         <div className="w-60 inline-block">
           <p
             className="w-full block uppercase tracking-wide text-gray-700
@@ -83,7 +87,8 @@ function FormCheckout() {
             value={ fields.address }
             data-testid="customer_checkout__input-address"
             className="appearance-none block w-full bg-gray-200 text-gray-700 border
-            rounded py-3 px-4 my-2 leading-tight focus:outline-none focus:bg-white"
+            border-gray-200 rounded py-3 px-4 my-2 leading-tight focus:outline-none
+            focus:bg-white focus:border-gray-500"
           />
         </label>
         <label
@@ -110,6 +115,7 @@ function FormCheckout() {
         type="button"
         onClick={ insertSale }
         data-testid="customer_checkout__button-submit-order"
+        className="bg-green-800 text-white font-bold p-2 rounded hover:brightness-125"
       >
         FINALIZAR PEDIDO
       </button>
