@@ -11,12 +11,22 @@ const registerSale = async (req, res) => {
 const getById = async (req, res) => {
   const { id } = req.params;
 
+  console.log('teste1');
+
   const order = await saleService.getById(Number(id));
 
   return res.status(200).json(order);
 };
 
+const getAll = async (req, res) => {
+  const userId = req.data.id;
+  const orders = await saleService.getAll(userId);
+
+  return res.status(200).json(orders);
+};
+
 module.exports = {
   registerSale,
   getById,
+  getAll,
 };
