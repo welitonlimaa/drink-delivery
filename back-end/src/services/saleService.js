@@ -43,7 +43,10 @@ const registerSale = async ({ saleData, userId }) => {
 
 const getById = async (orderId) => {
   const order = await Sales.findByPk(orderId, { 
-    include: { model: Products, as: 'products', through: { attributes: ['quantity'] } },
+    include: [
+      { model: Products, as: 'products', through: { attributes: ['quantity'] } },
+      { model: Users, as: 'seller', attributes: { exclude: ['password'] } },
+    ],
   });
 
   return order;
