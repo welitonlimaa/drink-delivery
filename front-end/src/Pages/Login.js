@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Redirect, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { isExpired } from 'react-jwt';
 import AppContext from '../context/AppContext';
 import logo from '../images/logo.png';
 import dataValidate from '../utils/dataValidate';
@@ -27,6 +28,14 @@ function Login() {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+      const isTokenExpired = isExpired(user.token);
+      setIsLogged(!isTokenExpired);
+    }
+  }, []);
 
   useEffect(() => {
     const data = dataValidate(fields);
