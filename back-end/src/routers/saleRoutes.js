@@ -6,4 +6,6 @@ const router = express.Router();
 
 router.post('/register', validateToken, saleController.registerSale);
 
+router.get('/:id', validateToken, saleController.getById);
+
 module.exports = router;

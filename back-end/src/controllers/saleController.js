@@ -8,6 +8,15 @@ const registerSale = async (req, res) => {
   return res.status(type).json(message);
 };
 
+const getById = async (req, res) => {
+  const { id } = req.params;
+
+  const order = await saleService.getById(Number(id));
+
+  return res.status(200).json(order);
+};
+
 module.exports = {
   registerSale,
+  getById,
 };

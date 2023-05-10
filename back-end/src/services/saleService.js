@@ -1,6 +1,6 @@
 const { newSaleSchema } = require('./validations/schemas');
 
-const { Users, Sales, SalesProducts, sequelize } = require('../database/models');
+const { Users, Sales, SalesProducts, Products, sequelize } = require('../database/models');
 
 const registerSalesProducts = async ({ products, saleCreated, t }) => {
   const saleId = saleCreated.id;
@@ -41,6 +41,15 @@ const registerSale = async ({ saleData, userId }) => {
   }
 };
 
+const getById = async (orderId) => {
+  const order = await Sales.findByPk(orderId, { 
+    include: { model: Products, as: 'products', through: { attributes: ['quantity'] } },
+  });
+
+  return order;
+};
+
 module.exports = {
   registerSale,
+  getById,
 };
