@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const { newSaleSchema } = require('./validations/schemas');
 
 const { Users, Sales, SalesProducts, Products, sequelize } = require('../database/models');
@@ -52,11 +53,18 @@ const getById = async (orderId) => {
   return order;
 };
 
-const getAll = async (userId) => {
+const getAll = async (id, role) => {
   const orders = await Sales.findAll({
     where: {
-      userId,
+      [Op.or]: [
+        { userId: id },
+        { sellerId: id },
+      ],      
     },
+    include: [
+      { model: Products, as: 'products', through: { attributes: ['quantity'] } },
+      { model: Users, as: role, attributes: { exclude: ['password'] } },
+    ],
   });
   return orders;
 };
