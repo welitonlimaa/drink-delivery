@@ -11,7 +11,7 @@ function RegisterForm({ register }) {
 
   useEffect(() => {
     const data = dataValidate(fields);
-    setIsValid((data.name && data.email && data.password && fields.role));
+    setIsValid((data.name && data.email && data.password));
   }, [fields]);
 
   return (
