@@ -12,6 +12,7 @@ function AppProvider({ children }) {
     email: '',
     password: '',
     name: '',
+    role: 'customer',
   });
 
   const values = useMemo(() => ({
