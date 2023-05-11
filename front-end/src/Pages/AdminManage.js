@@ -3,14 +3,16 @@ import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 import { isExpired } from 'react-jwt';
 import RegisterForm from '../components/RegisterForm';
 import AppContext from '../context/AppContext';
-import { createUser } from '../services/requests';
+import { createUser, requestData } from '../services/requests';
 import clearLocalStorage from '../utils/clearLocalStorage';
 import Header from '../components/Header';
+import UsersTable from '../components/UsersTable';
 
 function AdminManage() {
   const { fields, userData } = useContext(AppContext);
   const [hasError, setError] = useState(false);
   const [isLogged, setIsLogged] = useState(true);
+  const [users, setUsers] = useState([]);
 
   const register = async (e) => {
     e.preventDefault();
@@ -24,10 +26,19 @@ function AdminManage() {
     }
   };
 
+  const getUsersData = async () => {
+    const data = await requestData('/users/');
+    setUsers(data);
+  };
+
   useEffect(() => {
     const isTokenExpired = isExpired(userData.token);
     setIsLogged(!isTokenExpired);
-    if (userData.role !== 'administrator') setIsLogged(false);
+    if (userData.role !== 'administrator') {
+      setIsLogged(false);
+    } else {
+      getUsersData();
+    }
   }, []);
 
   if (!isLogged) {
@@ -50,6 +61,9 @@ function AdminManage() {
       </div>
       <div>
         <RegisterForm register={ register } />
+      </div>
+      <div>
+        <UsersTable users={ users } />
       </div>
     </>
   );
