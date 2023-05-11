@@ -7,7 +7,7 @@ import sumTotal from '../utils/totalSum';
 import convertDateFormat from '../utils/convertDateFormat';
 import Header from '../components/Header';
 
-function CustomerOrderId() {
+function OrderId() {
   const [isLoading, setIsLoading] = useState(true);
   const [orderData, setOrderData] = useState({});
   const [total, setTotal] = useState(0);
@@ -84,4 +84,4 @@ function CustomerOrderId() {
   );
 }
 
-export default CustomerOrderId;
+export default OrderId;
