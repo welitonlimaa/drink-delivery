@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import convertDateFormat from '../utils/convertDateFormat';
 
 function OrderCard({ order }) {
-  console.log(order);
   const {
     id,
     status,

@@ -2,14 +2,15 @@ import PropTypes from 'prop-types';
 
 function ProductTable({ item, id, name, price, quantity, hasButton, remove }) {
   const subTotal = (Number(price) * Number(quantity)).toFixed(2);
+  const user = JSON.parse(localStorage.getItem('user'));
   return (
     <tr className="border-b dark:border-neutral-500">
       <th
         scope="row"
         data-testid={
           hasButton
-            ? `customer_checkout__element-order-table-item-number-${item}`
-            : `customer_order_details__element-order-table-item-number-${item}`
+            ? `${user.role}_checkout__element-order-table-item-number-${item}`
+            : `${user.role}_order_details__element-order-table-item-number-${item}`
         }
         className="whitespace-nowrap px-6 py-4 font-medium"
       >
@@ -18,8 +19,8 @@ function ProductTable({ item, id, name, price, quantity, hasButton, remove }) {
       <td
         data-testid={
           hasButton
-            ? `customer_checkout__element-order-table-name-${item}`
-            : `customer_order_details__element-order-table-name-${item}`
+            ? `${user.role}_checkout__element-order-table-name-${item}`
+            : `${user.role}_order_details__element-order-table-name-${item}`
         }
         className="whitespace-nowrap px-6 py-4"
       >
@@ -28,8 +29,8 @@ function ProductTable({ item, id, name, price, quantity, hasButton, remove }) {
       <td
         data-testid={
           hasButton
-            ? `customer_checkout__element-order-table-quantity-${item}`
-            : `customer_order_details__element-order-table-quantity-${item}`
+            ? `${user.role}_checkout__element-order-table-quantity-${item}`
+            : `${user.role}_order_details__element-order-table-quantity-${item}`
         }
         className="whitespace-nowrap px-6 py-4"
       >
@@ -38,8 +39,8 @@ function ProductTable({ item, id, name, price, quantity, hasButton, remove }) {
       <td
         data-testid={
           hasButton
-            ? `customer_checkout__element-order-table-unit-price-${item}`
-            : `customer_order_details__element-order-table-unit-price-${item}`
+            ? `${user.role}_checkout__element-order-table-unit-price-${item}`
+            : `${user.role}_order_details__element-order-table-unit-price-${item}`
         }
         className="whitespace-nowrap px-6 py-4"
       >
@@ -48,8 +49,8 @@ function ProductTable({ item, id, name, price, quantity, hasButton, remove }) {
       <td
         data-testid={
           hasButton
-            ? `customer_checkout__element-order-table-sub-total-${item}`
-            : `customer_order_details__element-order-table-sub-total-${item}`
+            ? `${user.role}_checkout__element-order-table-sub-total-${item}`
+            : `${user.role}_order_details__element-order-table-sub-total-${item}`
         }
         className="whitespace-nowrap px-6 py-4"
       >
@@ -64,7 +65,7 @@ function ProductTable({ item, id, name, price, quantity, hasButton, remove }) {
               type="button"
               onClick={ () => remove(id) }
               className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-              data-testid={ `customer_checkout__element-order-table-remove-${item}` }
+              data-testid={ `${user.role}_checkout__element-order-table-remove-${item}` }
             >
               Remove
             </button>

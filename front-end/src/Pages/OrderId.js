@@ -13,8 +13,10 @@ function OrderId() {
   const [total, setTotal] = useState(0);
   const params = useParams();
 
+  const user = JSON.parse(localStorage.getItem('user'));
+
   const requestOrderData = async (id) => {
-    const { token } = JSON.parse(localStorage.getItem('user'));
+    const { token } = user;
     setToken(token);
 
     const data = await requestData(`/sales/${id}`);
@@ -31,25 +33,28 @@ function OrderId() {
 
   if (isLoading) return <Loading />;
 
-  const testPrefix = 'customer_order_details__';
+  const testPrefix = `${user.role}_order_details__`;
 
   const digits = 4;
 
   return (
     <>
       <Header />
-      <div>
+      <div className="flex justify-around my-3 uppercase font-bold">
         <span
           data-testid={ `${testPrefix}element-order-details-label-order-id` }
         >
-          { orderData.id }
+          { `Pedido: ${orderData.id}` }
         </span>
-        P. Vend:
-        <span
-          data-testid={ `${testPrefix}element-order-details-label-seller-name` }
-        >
-          { orderData.seller.name }
-        </span>
+        {
+          user.role !== 'customer' ? null : (
+            <span
+              data-testid={ `${testPrefix}element-order-details-label-seller-name` }
+            >
+              { `P. Vendedora: ${orderData.seller.name}` }
+            </span>
+          )
+        }
         <span
           data-testid={ `${testPrefix}element-order-details-label-order-date` }
         >
@@ -60,13 +65,38 @@ function OrderId() {
         >
           { orderData.status }
         </span>
-        <button
-          type="button"
-          data-testid={ `${testPrefix}button-delivery-check` }
-          disabled={ orderData.status !== 'Em Trânsito' }
-        >
-          MARCAR COMO ENTREGUE
-        </button>
+        {
+          user.role === 'customer' ? (
+            <button
+              type="button"
+              data-testid={ `${testPrefix}button-delivery-check` }
+              disabled={ orderData.status !== 'Em Trânsito' }
+              className="bg-green-600 p-1 text-white hover:brightness-110"
+            >
+              MARCAR COMO ENTREGUE
+            </button>
+          )
+            : (
+              <div className="text-white">
+                <button
+                  type="button"
+                  data-testid={ `${testPrefix}button-preparing-check` }
+                  disabled={ orderData.status !== 'Pendente' }
+                  className="bg-green-400 p-1 mx-2 hover:brightness-110"
+                >
+                  PREPARAR PEDIDO
+                </button>
+                <button
+                  type="button"
+                  data-testid={ `${testPrefix}button-dispatch-check` }
+                  disabled={ orderData.status !== 'Preparando' }
+                  className="bg-green-600 p-1 mx-2 hover:brightness-110"
+                >
+                  SAIU PARA ENTREGA
+                </button>
+              </div>
+            )
+        }
       </div>
       <div>
         <OrderTable products={ orderData.products } />
