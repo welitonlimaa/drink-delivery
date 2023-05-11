@@ -4,8 +4,7 @@ import Register from '../Pages/Register';
 import Login from '../Pages/Login';
 import CustomerProducts from '../Pages/CustomerProducts';
 import CustomerCheckout from '../Pages/CustomerCheckout';
-import CustomerOrders from '../Pages/CustomerOrders';
-import SellerOrders from '../Pages/SellerOrders';
+import Orders from '../Pages/Orders';
 import AdminManage from '../Pages/AdminManage';
 import CustomerOrderId from '../Pages/CustomerOrderId';
 
@@ -19,9 +18,9 @@ function Routes() {
       <Route path="/register" component={ Register } />
       <Route path="/customer/checkout" component={ CustomerCheckout } />
       <Route path="/customer/products" component={ CustomerProducts } />
-      <Route exact path="/customer/orders" component={ CustomerOrders } />
+      <Route exact path="/customer/orders" component={ Orders } />
       <Route path="/customer/orders/:id" component={ CustomerOrderId } />
-      <Route path="/seller/orders" component={ SellerOrders } />
+      <Route path="/seller/orders" component={ Orders } />
       <Route path="/admin/manage" component={ AdminManage } />
     </Switch>
   );

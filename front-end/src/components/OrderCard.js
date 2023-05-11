@@ -4,7 +4,23 @@ import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import convertDateFormat from '../utils/convertDateFormat';
 
 function OrderCard({ order }) {
-  const { id, status, saleDate, totalPrice } = order;
+  console.log(order);
+  const {
+    id,
+    status,
+    saleDate,
+    totalPrice,
+    deliveryAddress,
+    deliveryNumber,
+  } = order;
+
+  const getUserRole = () => {
+    if (order.customer) {
+      return 'customer';
+    }
+    return 'seller';
+  };
+
   const colorStatus = {
     Entregue: 'green',
     Pendente: 'red',
@@ -14,12 +30,12 @@ function OrderCard({ order }) {
   return (
     <Link
       to={ `/customer/orders/${id}` }
-      className="flex bg-slate-50 m-1 w-60 text-center justify-evenly p-2 shadow-md
-      shadow-slate-600 hover:brightness-125"
+      className="flex bg-slate-50 m-1 w-64 text-center justify-evenly p-2 shadow-md
+      shadow-slate-600 hover:brightness-125 flex-wrap"
     >
       <div className="bg-white p-1">
         <p>Pedido</p>
-        <h2 data-testid={ `customer_orders__element-order-id-${id}` }>{ id }</h2>
+        <h2 data-testid={ `${getUserRole()}_orders__element-order-id-${id}` }>{ id }</h2>
       </div>
       <div
         className={
@@ -27,7 +43,7 @@ function OrderCard({ order }) {
         }
       >
         <p
-          data-testd={ `customer_orders__element-delivery-status-${id}` }
+          data-testd={ `${getUserRole()}_orders__element-delivery-status-${id}` }
         >
           { status }
         </p>
@@ -35,17 +51,28 @@ function OrderCard({ order }) {
       <div>
         <p
           className="bg-white p-1"
-          data-testd={ `customer_orders__element-order-date-${id}` }
+          data-testd={ `${getUserRole()}_orders__element-order-date-${id}` }
         >
           { convertDateFormat(saleDate, 2) }
         </p>
         <p
           className="bg-white p-1"
-          data-testd={ `customer_orders__element-card-price-${id}` }
+          data-testd={ `${getUserRole()}_orders__element-card-price-${id}` }
         >
           { totalPrice.replace(/\./, ',') }
         </p>
       </div>
+      {
+        getUserRole() !== 'seller' ? null : (
+          <div className="text-xs w-full text-right">
+            <p data-testid={ `seller_orders__element-card-address-${id}` }>
+              {
+                `${deliveryAddress}, ${deliveryNumber}`
+              }
+            </p>
+          </div>
+        )
+      }
     </Link>
   );
 }
@@ -56,6 +83,11 @@ OrderCard.propTypes = {
     status: Proptypes.string,
     saleDate: Proptypes.string,
     totalPrice: Proptypes.string,
+    customer: Proptypes.shape({
+      role: Proptypes.string,
+    }),
+    deliveryAddress: Proptypes.string,
+    deliveryNumber: Proptypes.string,
   }).isRequired,
 };
 
