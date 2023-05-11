@@ -5,6 +5,7 @@ import Loading from '../components/Loading';
 import OrderTable from '../components/OrderTable';
 import sumTotal from '../utils/totalSum';
 import convertDateFormat from '../utils/convertDateFormat';
+import Header from '../components/Header';
 
 function CustomerOrderId() {
   const [isLoading, setIsLoading] = useState(true);
@@ -35,7 +36,8 @@ function CustomerOrderId() {
   const digits = 4;
 
   return (
-    <div>
+    <>
+      <Header />
       <div>
         <span
           data-testid={ `${testPrefix}element-order-details-label-order-id` }
@@ -78,7 +80,7 @@ function CustomerOrderId() {
           { (total.toFixed(2)).replace(/\./, ',') }
         </span>
       </p>
-    </div>
+    </>
   );
 }
 

@@ -55,6 +55,7 @@ function CartProductsTable({ setTotal }) {
               id={ id }
               name={ name }
               price={ price }
+              hasButton
               quantity={ quantity }
               remove={ remove }
             />))
