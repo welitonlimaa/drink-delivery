@@ -1,0 +1,5 @@
+{
+    "customer": "/customer/products",
+    "seller": "/seller/orders",
+    "administrator": "/admin/manage"
+}

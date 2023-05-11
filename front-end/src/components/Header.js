@@ -37,7 +37,7 @@ function Header() {
           role === 'administrator'
             ? (
               <Link
-                to="/admin/manager"
+                to="/admin/manage"
                 className="p-3 flex items-center grow h-full text-sm"
                 data-testid="customer_products__element-navbar-link-orders"
               >

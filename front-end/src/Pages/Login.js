@@ -5,9 +5,10 @@ import AppContext from '../context/AppContext';
 import logo from '../images/logo.png';
 import dataValidate from '../utils/dataValidate';
 import { requestLogin } from '../services/requests';
+import routes from '../json/routes.json';
 
 function Login() {
-  const { fields, setFormFields, setUserData } = useContext(AppContext);
+  const { fields, setFormFields, userData, setUserData } = useContext(AppContext);
   const [isValid, setIsValid] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
   const [unauthorized, changeAuthorized] = useState(false);
@@ -47,7 +48,7 @@ function Login() {
     history.push(endpoint);
   };
 
-  if (isLogged) return <Redirect to="/customer/products" />;
+  if (isLogged) return <Redirect to={ `${routes[userData.role]}` } />;
 
   return (
     <div className="flex justify-center">

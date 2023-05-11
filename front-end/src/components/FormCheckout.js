@@ -68,7 +68,7 @@ function FormCheckout() {
               options={ sellers }
               value={ fields.seller }
               handleChange={ setFormFields }
-              data-testid="customer_checkout__select-seller"
+              dataTestId="customer_checkout__select-seller"
             />
           </div>
         </div>

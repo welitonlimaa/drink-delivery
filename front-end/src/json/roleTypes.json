@@ -1,0 +1,14 @@
+[
+    {
+        "id": "customer",
+        "name": "Cliente"
+    },
+    {
+        "id": "seller",
+        "name": "Vendedor"
+    },
+    {
+        "id": "administrator",
+        "name": "Administrador"
+    }
+]
