@@ -36,7 +36,7 @@ function CustomerOrderId() {
   const digits = 4;
 
   return (
-    <div>
+    <>
       <Header />
       <div>
         <span
@@ -80,7 +80,7 @@ function CustomerOrderId() {
           { (total.toFixed(2)).replace(/\./, ',') }
         </span>
       </p>
-    </div>
+    </>
   );
 }
 
