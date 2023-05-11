@@ -1,6 +1,6 @@
-function convertDateFormat(dateString) {
+function convertDateFormat(dateString, digits) {
   const date = new Date(dateString);
-  const yearDigits = -2;
+  const yearDigits = -digits;
 
   const day = String(date.getDate()).padStart(2, '0');
   const month = String(date.getMonth() + 1).padStart(2, '0');

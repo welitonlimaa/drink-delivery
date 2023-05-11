@@ -37,7 +37,7 @@ function OrderCard({ order }) {
           className="bg-white p-1"
           data-testd={ `customer_orders__element-order-date-${id}` }
         >
-          { convertDateFormat(saleDate) }
+          { convertDateFormat(saleDate, 2) }
         </p>
         <p
           className="bg-white p-1"

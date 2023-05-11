@@ -4,6 +4,7 @@ import { requestData, setToken } from '../services/requests';
 import Loading from '../components/Loading';
 import OrderTable from '../components/OrderTable';
 import sumTotal from '../utils/totalSum';
+import convertDateFormat from '../utils/convertDateFormat';
 
 function CustomerOrderId() {
   const [isLoading, setIsLoading] = useState(true);
@@ -29,34 +30,38 @@ function CustomerOrderId() {
 
   if (isLoading) return <Loading />;
 
+  const testPrefix = 'customer_order_details__';
+
+  const digits = 4;
+
   return (
     <div>
       <div>
         <span
-          data-testid="customer_order_details__element-order-details-label-order-id"
+          data-testid={ `${testPrefix}element-order-details-label-order-id` }
         >
           { orderData.id }
         </span>
         P. Vend:
         <span
-          data-testid="customer_order_details__element-order-details-label-seller-name"
+          data-testid={ `${testPrefix}element-order-details-label-seller-name` }
         >
           { orderData.seller.name }
         </span>
         <span
-          data-testid="customer_order_details__element-order-details-label-order-date"
+          data-testid={ `${testPrefix}element-order-details-label-order-date` }
         >
-          { orderData.saleDate }
+          { convertDateFormat(orderData.saleDate, digits) }
         </span>
         <span
-          data-testid="customer_order_details__element-order-
-          details-label-delivery-status"
+          data-testid={ `${testPrefix}element-order-details-label-delivery-status` }
         >
           { orderData.status }
         </span>
         <button
           type="button"
-          data-testid="customer_order_details__button-delivery-check"
+          data-testid={ `${testPrefix}button-delivery-check` }
+          disabled={ orderData.status !== 'Em Trânsito' }
         >
           MARCAR COMO ENTREGUE
         </button>
@@ -68,7 +73,7 @@ function CustomerOrderId() {
         Total: R$
         {' '}
         <span
-          data-testid="customer_order_details__element-order-total-price"
+          data-testid={ `${testPrefix}element-order-total-price` }
         >
           { (total.toFixed(2)).replace(/\./, ',') }
         </span>
