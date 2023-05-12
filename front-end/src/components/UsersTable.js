@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import UserRowTable from './UserRowTable';
 
-function UsersTable({ users }) {
+function UsersTable({ users, deleteUser }) {
   return (
     <table className="min-w-full text-left text-sm font-light">
       <thead
@@ -35,7 +35,7 @@ function UsersTable({ users }) {
               name={ name }
               email={ email }
               role={ role }
-              deleteUser={ (userId) => console.log(userId) }
+              deleteUser={ () => deleteUser(id) }
             />))
         }
       </tbody>
@@ -45,6 +45,7 @@ function UsersTable({ users }) {
 
 UsersTable.propTypes = {
   users: PropTypes.arrayOf(PropTypes.objectOf).isRequired,
+  deleteUser: PropTypes.func.isRequired,
 };
 
 export default UsersTable;

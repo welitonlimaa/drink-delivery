@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 import { isExpired } from 'react-jwt';
 import RegisterForm from '../components/RegisterForm';
 import AppContext from '../context/AppContext';
-import { createUser, requestData } from '../services/requests';
+import { createUser, deleteData, requestData } from '../services/requests';
 import clearLocalStorage from '../utils/clearLocalStorage';
 import Header from '../components/Header';
 import UsersTable from '../components/UsersTable';
@@ -13,6 +13,7 @@ function AdminManage() {
   const [hasError, setError] = useState(false);
   const [isLogged, setIsLogged] = useState(true);
   const [users, setUsers] = useState([]);
+  const [updated, setUpdated] = useState(false);
 
   const register = async (e) => {
     e.preventDefault();
@@ -24,6 +25,7 @@ function AdminManage() {
       console.log(error);
       setError(true);
     }
+    setUpdated(true);
   };
 
   const getUsersData = async () => {
@@ -39,12 +41,22 @@ function AdminManage() {
     } else {
       getUsersData();
     }
-  }, []);
+    if (updated) setUpdated(false);
+  }, [updated]);
 
   if (!isLogged) {
     clearLocalStorage();
     return <Redirect to="/login" />;
   }
+
+  const deleteUser = async (id) => {
+    await deleteData(`/users/destroy/${id}`);
+    setUpdated(true);
+  };
+
+  // useEffect(() => {
+
+  // }, [updated]);
 
   return (
     <>
@@ -63,7 +75,7 @@ function AdminManage() {
         <RegisterForm register={ register } />
       </div>
       <div className="flex flex-col overflow-x-auto">
-        <UsersTable users={ users } />
+        <UsersTable users={ users } deleteUser={ deleteUser } />
       </div>
     </>
   );
