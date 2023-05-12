@@ -59,7 +59,7 @@ function AdminManage() {
             : null
         }
       </div>
-      <div>
+      <div className="my-14">
         <RegisterForm register={ register } />
       </div>
       <div>

@@ -16,98 +16,100 @@ function RegisterForm({ register }) {
 
   return (
     <form
-      className="w-4/5 mx-auto bg-slate-200 p-3 rounded-lg flex flex-wrap
-      justify-center gap-y-10"
+      className="w-4/5 mx-auto p-3 rounded-lg flex flex-wrap
+      justify-center gap-y-10 bg-slate-200"
       action="#"
     >
-      <label
-        htmlFor="name"
-        className="mb-2 text-sm font-medium text-gray-900 dark:text-white"
-      >
-        Nome
-        <input
-          type="name"
-          name="name"
-          id="name"
-          placeholder="Seu nome"
-          required=""
-          data-testid="admin_manage__input-name"
-          value={ fields.name }
-          onChange={ setFormFields }
-          className="w-44 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm
-          rounded-lg focus:ring-primary-600 focus:border-primary-600
-          p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
-          dark:text-whitedark:focus:ring-blue-500 dark:focus:border-blue-500"
-        />
-      </label>
-      <label
-        htmlFor="email"
-        className="mb-2 text-sm font-medium text-gray-900 dark:text-white"
-      >
-        Email
-        <input
-          type="email"
-          name="email"
-          id="email"
-          placeholder="seu-email@site.com.br"
-          required=""
-          data-testid="admin_manage__input-email"
-          value={ fields.email }
-          onChange={ setFormFields }
-          className="w-44 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm
-          rounded-lg focus:ring-primary-600 focus:border-primary-600
-          p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
-        dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        />
-      </label>
-      <label
-        htmlFor="password"
-        className="mb-2 text-sm font-medium text-gray-900 dark:text-white"
-      >
-        Senha
-        <input
-          type="password"
-          name="password"
-          id="password"
-          placeholder="••••••••"
-          required=""
-          value={ fields.password }
-          onChange={ setFormFields }
-          data-testid="admin_manage__input-password"
-          className="w-44 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm
-          rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full
-          p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
-        dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        />
-      </label>
-      <div className="w-60 inline-block">
-        <p
-          className="w-full block uppercase tracking-wide text-gray-700
-          text-xs font-bold mb-2"
+      <div className="flex flex-wrap justify-center w-full gap-x-10">
+        <label
+          htmlFor="name"
+          className="w-60 uppercase tracking-wide
+          text-gray-700 text-xs font-bold"
         >
-          P. Vendedora Responsável:
-        </p>
-        <div className="relative">
-          <Select
-            id="role"
-            name="role"
-            options={ roleTypes }
-            value={ fields.role }
-            handleChange={ setFormFields }
-            dataTestId="admin_manage__select-role"
+          Nome
+          <input
+            type="name"
+            name="name"
+            id="name"
+            placeholder="Seu nome"
+            required=""
+            data-testid="admin_manage__input-name"
+            value={ fields.name }
+            onChange={ setFormFields }
+            className="p-2 max-[640px]:w-full -mx-1
+            my-1.5 text-lg rounded-lg border font-normal"
           />
+        </label>
+        <label
+          htmlFor="email"
+          className="w-60 mx-1 uppercase tracking-wide
+          text-gray-700 text-xs font-bold"
+        >
+          Email
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="seu-email@site.com.br"
+            required=""
+            data-testid="admin_manage__input-email"
+            value={ fields.email }
+            onChange={ setFormFields }
+            className="p-2 max-[640px]:w-full -mx-1
+            my-1.5 text-lg rounded-lg border font-normal"
+          />
+        </label>
+        <label
+          htmlFor="password"
+          className="w-60 mx-1 uppercase tracking-wide
+          text-gray-700 text-xs font-bold"
+        >
+          Senha
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="••••••••"
+            required=""
+            value={ fields.password }
+            onChange={ setFormFields }
+            data-testid="admin_manage__input-password"
+            className="p-2 max-[640px]:w-full -mx-1
+            my-1.5 text-lg rounded-lg border font-normal"
+          />
+        </label>
+        <div
+          className="w-60 mx-1 inline-block uppercase tracking-wide
+          text-gray-700 text-xs font-bold"
+        >
+          <p
+            className="w-full block uppercase tracking-wide text-gray-700
+            text-xs font-bold mb-2"
+          >
+            P. Vendedora Responsável:
+          </p>
+          <div className="relative">
+            <Select
+              id="role"
+              name="role"
+              options={ roleTypes }
+              value={ fields.role }
+              handleChange={ setFormFields }
+              dataTestId="admin_manage__select-role"
+            />
+          </div>
         </div>
+        <button
+          type="button"
+          disabled={ !isValid }
+          onClick={ (e) => register(e) }
+          data-testid="admin_manage__button-register"
+          className="flex items-center justify-center h-12 p-3 w-32 my-5 rounded
+          font-semibold text-sm bg-blue-600 text-blue-100 hover:bg-blue-700"
+        >
+          Cadastrar
+        </button>
       </div>
-      <button
-        type="button"
-        disabled={ !isValid }
-        onClick={ (e) => register(e) }
-        data-testid="admin_manage__button-register"
-        className="flex items-center justify-center h-12 px-6 w-64 bg-blue-600 mt-8
-        rounded font-semibold text-sm text-blue-100 hover:bg-blue-700"
-      >
-        Cadastrar
-      </button>
     </form>
   );
 }

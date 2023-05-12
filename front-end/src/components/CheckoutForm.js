@@ -4,7 +4,7 @@ import Select from './Select';
 import { createSale, requestData, setToken } from '../services/requests';
 import useForm from '../hooks/useForm';
 
-function FormCheckout() {
+function CheckoutForm() {
   const [sellers, setSellers] = useState([]);
   const history = useHistory();
   const [fields, setFormFields] = useForm({
@@ -49,8 +49,8 @@ function FormCheckout() {
 
   return (
     <form
-      className="w-4/5 mx-auto bg-slate-200 p-3 rounded-lg flex flex-wrap
-      justify-center gap-y-10"
+      className="w-4/5 mx-auto p-3 rounded-lg flex flex-wrap
+      justify-center gap-y-10 bg-slate-200"
     >
       <p className="uppercase font-bold">Detalhes e Endereço para Entrega</p>
       <div className="flex flex-wrap justify-center w-full gap-x-10">
@@ -86,8 +86,8 @@ function FormCheckout() {
             onChange={ setFormFields }
             value={ fields.address }
             data-testid="customer_checkout__input-address"
-            className="appearance-none block w-full bg-gray-200 text-gray-700 border
-            border-gray-200 rounded py-3 px-4 my-2 leading-tight focus:outline-none
+            className="appearance-none block w-full rounded py-3 px-4 my-2 border
+            leading-tight bg-gray-200 text-gray-700 border-gray-200 focus:outline-none
             focus:bg-white focus:border-gray-500"
           />
         </label>
@@ -123,4 +123,4 @@ function FormCheckout() {
   );
 }
 
-export default FormCheckout;
+export default CheckoutForm;

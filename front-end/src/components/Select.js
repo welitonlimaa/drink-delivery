@@ -9,12 +9,8 @@ function Select({ id, name, value, options, dataTestId, handleChange }) {
       defaultValue={ value }
       data-testid={ dataTestId }
       className="min-[641px]:p-2.5 max-[640px]:w-full max-[640px]:p-4
-      max-[640px]:m-1 bg-gray-50 border border-gray-300 text-gray-900
-      text-lg rounded-lg"
+      -mx-1 -my-0.5 text-lg rounded-lg border bg-gray-50 border-gray-300 text-gray-900"
     >
-      <option>
-        Selecione um vendedor
-      </option>
       {
         options.map((data, index) => (
           <option

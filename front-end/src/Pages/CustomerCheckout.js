@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import CartProductsTable from '../components/CartProductsTable';
-import FormCheckout from '../components/FormCheckout';
+import CheckoutForm from '../components/CheckoutForm';
 
 function CustomerCheckout() {
   const [total, setTotal] = useState(0);
@@ -29,7 +29,7 @@ function CustomerCheckout() {
         </p>
       </div>
       <div className="my-8">
-        <FormCheckout />
+        <CheckoutForm />
       </div>
     </div>
   );
