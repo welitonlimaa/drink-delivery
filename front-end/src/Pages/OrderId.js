@@ -40,7 +40,7 @@ function OrderId() {
 
   useEffect(() => {
     requestOrderData(params.id);
-  }, []);
+  }, [status]);
 
   if (isLoading) return <Loading />;
 
@@ -87,7 +87,7 @@ function OrderId() {
             <button
               type="button"
               data-testid={ `${testPrefix}button-delivery-check` }
-              disabled={ orderData.status !== 'Em Trânsito' }
+              disabled={ status !== 'Em Trânsito' }
               onClick={ () => updateStatus('Entregue') }
               className="bg-green-600 p-1 text-white hover:brightness-110
               disabled:bg-slate-600"
@@ -100,7 +100,7 @@ function OrderId() {
                 <button
                   type="button"
                   data-testid={ `${testPrefix}button-preparing-check` }
-                  disabled={ orderData.status !== 'Pendente' }
+                  disabled={ status !== 'Pendente' }
                   onClick={ () => updateStatus('Preparando') }
                   className="bg-green-400 p-1 mx-2 hover:brightness-110"
                 >
@@ -109,7 +109,7 @@ function OrderId() {
                 <button
                   type="button"
                   data-testid={ `${testPrefix}button-dispatch-check` }
-                  disabled={ orderData.status !== 'Preparando' }
+                  disabled={ status !== 'Preparando' }
                   onClick={ () => updateStatus('Em Trânsito') }
                   className="bg-green-600 p-1 mx-2 hover:brightness-110"
                 >
