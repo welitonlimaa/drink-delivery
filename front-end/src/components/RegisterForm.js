@@ -1,12 +1,10 @@
 import PropTypes from 'prop-types';
-import { useContext, useEffect, useState } from 'react';
-import AppContext from '../context/AppContext';
+import { useEffect, useState } from 'react';
 import dataValidate from '../utils/dataValidate';
 import Select from './Select';
 import roleTypes from '../json/roleTypes.json';
 
-function RegisterForm({ register }) {
-  const { fields, setFormFields } = useContext(AppContext);
+function RegisterForm({ register, fields, setFormFields }) {
   const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
@@ -105,7 +103,8 @@ function RegisterForm({ register }) {
           onClick={ (e) => register(e) }
           data-testid="admin_manage__button-register"
           className="flex items-center justify-center h-12 p-3 w-32 my-5 rounded
-          font-semibold text-sm bg-blue-600 text-blue-100 hover:bg-blue-700 disabled:bg-red-500"
+          font-semibold text-sm bg-blue-600 text-blue-100 hover:bg-blue-700
+          disabled:bg-red-500"
         >
           Cadastrar
         </button>
@@ -116,6 +115,8 @@ function RegisterForm({ register }) {
 
 RegisterForm.propTypes = {
   register: PropTypes.func.isRequired,
+  fields: PropTypes.objectOf(PropTypes.string).isRequired,
+  setFormFields: PropTypes.func.isRequired,
 };
 
 export default RegisterForm;

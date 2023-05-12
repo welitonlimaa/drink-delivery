@@ -7,13 +7,20 @@ import { createUser, deleteData, requestData } from '../services/requests';
 import clearLocalStorage from '../utils/clearLocalStorage';
 import Header from '../components/Header';
 import UsersTable from '../components/UsersTable';
+import useForm from '../hooks/useForm';
 
 function AdminManage() {
-  const { fields, userData } = useContext(AppContext);
+  const { userData } = useContext(AppContext);
   const [hasError, setError] = useState(false);
   const [isLogged, setIsLogged] = useState(true);
   const [users, setUsers] = useState([]);
   const [updated, setUpdated] = useState(false);
+  const [fields, setFormFields] = useForm({
+    email: '',
+    password: '',
+    name: '',
+    role: '',
+  });
 
   const register = async (e) => {
     e.preventDefault();
@@ -54,10 +61,6 @@ function AdminManage() {
     setUpdated(true);
   };
 
-  // useEffect(() => {
-
-  // }, [updated]);
-
   return (
     <>
       <Header />
@@ -72,7 +75,11 @@ function AdminManage() {
         }
       </div>
       <div className="my-14">
-        <RegisterForm register={ register } />
+        <RegisterForm
+          register={ register }
+          fields={ fields }
+          setFormFields={ setFormFields }
+        />
       </div>
       <div className="flex flex-col overflow-x-auto">
         <UsersTable users={ users } deleteUser={ deleteUser } />
