@@ -99,7 +99,7 @@ function OrderId() {
                 <button
                   type="button"
                   data-testid={ `${testPrefix}button-preparing-check` }
-                  disabled={ orderData.status !== 'Pendente' }
+                  disabled={ status !== 'Pendente' }
                   onClick={ () => updateStatus('Preparando') }
                   className="bg-green-400 p-1 mx-2 hover:brightness-110"
                 >
@@ -108,7 +108,7 @@ function OrderId() {
                 <button
                   type="button"
                   data-testid={ `${testPrefix}button-dispatch-check` }
-                  disabled={ orderData.status !== 'Preparando' }
+                  disabled={ status !== 'Preparando' }
                   onClick={ () => updateStatus('Em Trânsito') }
                   className="bg-green-600 p-1 mx-2 hover:brightness-110"
                 >

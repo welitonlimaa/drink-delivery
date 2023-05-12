@@ -11,7 +11,7 @@ function RegisterForm({ register }) {
 
   useEffect(() => {
     const data = dataValidate(fields);
-    setIsValid((data.name && data.email && data.password));
+    setIsValid((data.name && data.email && data.password && fields.role));
   }, [fields]);
 
   return (
@@ -105,7 +105,7 @@ function RegisterForm({ register }) {
           onClick={ (e) => register(e) }
           data-testid="admin_manage__button-register"
           className="flex items-center justify-center h-12 p-3 w-32 my-5 rounded
-          font-semibold text-sm bg-blue-600 text-blue-100 hover:bg-blue-700"
+          font-semibold text-sm bg-blue-600 text-blue-100 hover:bg-blue-700 disabled:bg-red-500"
         >
           Cadastrar
         </button>
