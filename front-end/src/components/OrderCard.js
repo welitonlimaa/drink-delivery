@@ -42,7 +42,7 @@ function OrderCard({ order }) {
         }
       >
         <p
-          data-testd={ `${getUserRole()}_orders__element-delivery-status-${id}` }
+          data-testid={ `${getUserRole()}_orders__element-delivery-status-${id}` }
         >
           { status }
         </p>
@@ -50,13 +50,13 @@ function OrderCard({ order }) {
       <div>
         <p
           className="bg-white p-1"
-          data-testd={ `${getUserRole()}_orders__element-order-date-${id}` }
+          data-testid={ `${getUserRole()}_orders__element-order-date-${id}` }
         >
           { convertDateFormat(saleDate, 2) }
         </p>
         <p
           className="bg-white p-1"
-          data-testd={ `${getUserRole()}_orders__element-card-price-${id}` }
+          data-testid={ `${getUserRole()}_orders__element-card-price-${id}` }
         >
           { totalPrice.replace(/\./, ',') }
         </p>
