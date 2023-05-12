@@ -29,7 +29,7 @@ function OrderCard({ order }) {
   return (
     <Link
       to={ `/${getUserRole()}/orders/${id}` }
-      className="flex bg-slate-50 m-1 w-64 text-center justify-evenly p-2 shadow-md
+      className="flex bg-slate-50 m-1 w-72 text-center justify-evenly p-2 shadow-md
       shadow-slate-600 hover:brightness-125 flex-wrap"
     >
       <div className="bg-white p-1">

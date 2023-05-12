@@ -28,9 +28,12 @@ export const createSale = async (endpoint, body) => {
   return data;
 };
 
-// export const getAllOrders = async (endpoint) => {
-//   const { data } = await api.get(endpoint);
-//   return data;
-// };
+export const updateData = async (endpoint, body) => {
+  await api.patch(endpoint, body);
+};
+
+export const deleteData = async (endpoint) => {
+  await api.delete(endpoint);
+};
 
 export default api;

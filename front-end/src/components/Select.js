@@ -11,6 +11,9 @@ function Select({ id, name, value, options, dataTestId, handleChange }) {
       className="min-[641px]:p-2.5 max-[640px]:w-full max-[640px]:p-4
       -mx-1 -my-0.5 text-lg rounded-lg border bg-gray-50 border-gray-300 text-gray-900"
     >
+      <option>
+        { name }
+      </option>
       {
         options.map((data, index) => (
           <option

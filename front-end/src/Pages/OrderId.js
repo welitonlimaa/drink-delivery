@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { requestData, setToken } from '../services/requests';
+import { requestData, setToken, updateData } from '../services/requests';
 import Loading from '../components/Loading';
 import OrderTable from '../components/OrderTable';
 import sumTotal from '../utils/totalSum';
@@ -8,6 +8,7 @@ import convertDateFormat from '../utils/convertDateFormat';
 import Header from '../components/Header';
 
 function OrderId() {
+  const [status, setStatus] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [orderData, setOrderData] = useState({});
   const [total, setTotal] = useState(0);
@@ -25,6 +26,16 @@ function OrderId() {
     const sum = sumTotal(data.products);
     setTotal(sum);
     setIsLoading(false);
+    setStatus(data.status);
+  };
+
+  const updateStatus = async (orderStatus) => {
+    const { token } = user;
+    setToken(token);
+
+    await updateData(`/sales/${orderData.id}`, { status: orderStatus });
+
+    setStatus(orderStatus);
   };
 
   useEffect(() => {
@@ -69,7 +80,7 @@ function OrderId() {
         <span
           data-testid={ `${testPrefix}element-order-details-label-delivery-status` }
         >
-          { orderData.status }
+          { status }
         </span>
         {
           user.role === 'customer' ? (
@@ -77,6 +88,7 @@ function OrderId() {
               type="button"
               data-testid={ `${testPrefix}button-delivery-check` }
               disabled={ orderData.status !== 'Em Trânsito' }
+              onClick={ () => updateStatus('Entregue') }
               className="bg-green-600 p-1 text-white hover:brightness-110"
             >
               MARCAR COMO ENTREGUE
@@ -88,6 +100,7 @@ function OrderId() {
                   type="button"
                   data-testid={ `${testPrefix}button-preparing-check` }
                   disabled={ orderData.status !== 'Pendente' }
+                  onClick={ () => updateStatus('Preparando') }
                   className="bg-green-400 p-1 mx-2 hover:brightness-110"
                 >
                   PREPARAR PEDIDO
@@ -96,6 +109,7 @@ function OrderId() {
                   type="button"
                   data-testid={ `${testPrefix}button-dispatch-check` }
                   disabled={ orderData.status !== 'Preparando' }
+                  onClick={ () => updateStatus('Em Trânsito') }
                   className="bg-green-600 p-1 mx-2 hover:brightness-110"
                 >
                   SAIU PARA ENTREGA
