@@ -63,8 +63,17 @@ const getUsers = async (role) => {
   return sellers;
 };
 
+const deleteUser = async (userId) => {
+  await Users.destroy({
+    where: {
+      id: userId,
+    },
+  });
+};
+
 module.exports = {
   login,
   register,
   getUsers,
+  deleteUser,
 };
