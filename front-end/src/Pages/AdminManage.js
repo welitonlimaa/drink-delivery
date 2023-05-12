@@ -62,7 +62,7 @@ function AdminManage() {
       <div className="my-14">
         <RegisterForm register={ register } />
       </div>
-      <div>
+      <div className="flex flex-col overflow-x-auto">
         <UsersTable users={ users } />
       </div>
     </>
