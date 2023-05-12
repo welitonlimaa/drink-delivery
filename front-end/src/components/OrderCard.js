@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Proptypes from 'prop-types';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import convertDateFormat from '../utils/convertDateFormat';
+import AppContext from '../context/AppContext';
 
 function OrderCard({ order }) {
+  const { userData } = useContext(AppContext);
+  const { role } = userData;
   const {
     id,
     status,
@@ -13,13 +16,6 @@ function OrderCard({ order }) {
     deliveryNumber,
   } = order;
 
-  const getUserRole = () => {
-    if (order.customer) {
-      return 'customer';
-    }
-    return 'seller';
-  };
-
   const colorStatus = {
     Entregue: 'green',
     Pendente: 'red',
@@ -28,13 +24,13 @@ function OrderCard({ order }) {
   };
   return (
     <Link
-      to={ `/${getUserRole()}/orders/${id}` }
+      to={ `/${role}/orders/${id}` }
       className="flex bg-slate-50 m-1 w-72 text-center justify-evenly p-2 shadow-md
       shadow-slate-600 hover:brightness-125 flex-wrap"
     >
       <div className="bg-white p-1">
         <p>Pedido</p>
-        <h2 data-testid={ `${getUserRole()}_orders__element-order-id-${id}` }>{ id }</h2>
+        <h2 data-testid={ `${role}_orders__element-order-id-${id}` }>{ id }</h2>
       </div>
       <div
         className={
@@ -42,7 +38,7 @@ function OrderCard({ order }) {
         }
       >
         <p
-          data-testid={ `${getUserRole()}_orders__element-delivery-status-${id}` }
+          data-testid={ `${role}_orders__element-delivery-status-${id}` }
         >
           { status }
         </p>
@@ -50,19 +46,19 @@ function OrderCard({ order }) {
       <div>
         <p
           className="bg-white p-1"
-          data-testid={ `${getUserRole()}_orders__element-order-date-${id}` }
+          data-testid={ `${role}_orders__element-order-date-${id}` }
         >
           { convertDateFormat(saleDate, 2) }
         </p>
         <p
           className="bg-white p-1"
-          data-testid={ `${getUserRole()}_orders__element-card-price-${id}` }
+          data-testid={ `${role}_orders__element-card-price-${id}` }
         >
           { totalPrice.replace(/\./, ',') }
         </p>
       </div>
       {
-        getUserRole() !== 'seller' ? null : (
+        role !== 'seller' ? null : (
           <div className="text-xs w-full text-right">
             <p data-testid={ `seller_orders__element-card-address-${id}` }>
               {
