@@ -34,7 +34,7 @@ function OrderCard({ order }) {
       </div>
       <div
         className={
-          `flex align-middle text-center bg-${colorStatus[status]}-400 p-2`
+          `flex align-middle text-center capitalize bg-${colorStatus[status]}-400 p-2`
         }
       >
         <p

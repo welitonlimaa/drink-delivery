@@ -89,7 +89,8 @@ function OrderId() {
               data-testid={ `${testPrefix}button-delivery-check` }
               disabled={ orderData.status !== 'Em Trânsito' }
               onClick={ () => updateStatus('Entregue') }
-              className="bg-green-600 p-1 text-white hover:brightness-110"
+              className="bg-green-600 p-1 text-white hover:brightness-110
+              disabled:bg-slate-600"
             >
               MARCAR COMO ENTREGUE
             </button>
