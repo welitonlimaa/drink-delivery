@@ -40,7 +40,7 @@ function OrderId() {
   return (
     <>
       <Header />
-      <div className="flex justify-around my-3 uppercase font-bold">
+      <div className="flex justify-around my-3 capitalize font-bold">
         <span
           data-testid={ `${testPrefix}element-order-details-label-order-id` }
         >
@@ -48,11 +48,17 @@ function OrderId() {
         </span>
         {
           user.role !== 'customer' ? null : (
-            <span
-              data-testid={ `${testPrefix}element-order-details-label-seller-name` }
-            >
-              { `P. Vendedora: ${orderData.seller.name}` }
-            </span>
+            <div>
+              <span>
+                P. Vendedora:
+                {' '}
+              </span>
+              <span
+                data-testid={ `${testPrefix}element-order-details-label-seller-name` }
+              >
+                { `${orderData.seller.name}` }
+              </span>
+            </div>
           )
         }
         <span
