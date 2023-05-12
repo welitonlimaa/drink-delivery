@@ -40,7 +40,7 @@ function OrderId() {
 
   useEffect(() => {
     requestOrderData(params.id);
-  }, []);
+  }, [status]);
 
   if (isLoading) return <Loading />;
 
@@ -87,7 +87,7 @@ function OrderId() {
             <button
               type="button"
               data-testid={ `${testPrefix}button-delivery-check` }
-              disabled={ orderData.status !== 'Em Trânsito' }
+              disabled={ status !== 'Em Trânsito' }
               onClick={ () => updateStatus('Entregue') }
               className="bg-green-600 p-1 text-white hover:brightness-110"
             >
