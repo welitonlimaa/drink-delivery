@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 import { isExpired } from 'react-jwt';
 import RegisterForm from '../components/RegisterForm';
 import AppContext from '../context/AppContext';
-import { createUser, deleteData, requestData } from '../services/requests';
+import { createUser, deleteData, requestData, setToken } from '../services/requests';
 import clearLocalStorage from '../utils/clearLocalStorage';
 import Header from '../components/Header';
 import UsersTable from '../components/UsersTable';
@@ -22,10 +22,13 @@ function AdminManage() {
     role: '',
   });
 
+  const user = JSON.parse(localStorage.getItem('user'));
+
   const register = async (e) => {
     e.preventDefault();
 
     try {
+      setToken(user.token);
       await createUser('/users/register', fields);
       setError(false);
     } catch (error) {
