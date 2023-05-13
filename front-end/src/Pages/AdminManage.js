@@ -29,7 +29,7 @@ function AdminManage() {
 
     try {
       setToken(user.token);
-      await createUser('/users/register', fields);
+      await createUser('/users/admin/register', fields);
       setError(false);
     } catch (error) {
       console.log(error);

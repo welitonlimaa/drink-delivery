@@ -7,11 +7,21 @@ const login = async (req, res) => {
   return res.status(type).json(message);
 };
 
-const register = async (req, res) => {
+const customerRegister = async (req, res) => {
   const { body } = req;
-  const { type, message } = await userService.register(body);
+  const { type, message } = await userService.customerRegister(body);
 
   return res.status(type).json(message);
+};
+
+const register = async (req, res) => {
+  const { body } = req;
+  const { data } = req;
+  if (data.role === 'administrator') {
+    const { type, message } = await userService.register(body);
+    return res.status(type).json(message);
+  }
+  return res.status(401).json('Unauthorized!');
 };
 
 const getUsers = async (req, res) => {
@@ -33,6 +43,7 @@ const deleteUser = async (req, res) => {
 module.exports = {
   login,
   register,
+  customerRegister,
   getUsers,
   deleteUser,
 };

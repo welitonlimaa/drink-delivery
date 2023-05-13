@@ -47,6 +47,12 @@ const register = async ({ name, email, password, role }) => {
   return { type: 201, message: { name, email, role, token } };
 };
 
+const customerRegister = async (userData) => {
+  const result = await register({ ...userData, role: 'customer' });
+
+  return result;
+};
+
 const getUsers = async (role) => {
   let sellers = [];
   if (role) {
@@ -74,6 +80,7 @@ const deleteUser = async (userId) => {
 module.exports = {
   login,
   register,
+  customerRegister,
   getUsers,
   deleteUser,
 };

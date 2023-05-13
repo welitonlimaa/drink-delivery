@@ -21,7 +21,7 @@ function Register() {
           email: fields.email,
           password: fields.password,
           name: fields.name,
-          role: 'customer' },
+        },
       );
       setUserData(data);
       setIsLogged(true);
