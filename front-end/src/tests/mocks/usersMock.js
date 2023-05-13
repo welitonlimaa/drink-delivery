@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 const customerEmail = 'zebirita@email.com';
 
 export const loginCustomerData = {
