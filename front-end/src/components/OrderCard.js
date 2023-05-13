@@ -22,6 +22,9 @@ function OrderCard({ order }) {
     Preparando: 'yellow',
     'Em Trânsito': 'orange',
   };
+
+  const digits = 4;
+
   return (
     <Link
       to={ `/${role}/orders/${id}` }
@@ -48,7 +51,7 @@ function OrderCard({ order }) {
           className="bg-white p-1"
           data-testid={ `${role}_orders__element-order-date-${id}` }
         >
-          { convertDateFormat(saleDate, 2) }
+          { convertDateFormat(saleDate, digits) }
         </p>
         <p
           className="bg-white p-1"
