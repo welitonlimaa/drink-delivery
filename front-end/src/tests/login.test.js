@@ -1,22 +1,24 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
-import AppContext from '../context/AppContext';
 import { loginCustomerData } from './mocks/usersMock';
+import AppProvider from '../context/AppProvider';
+import renderWithRouter from '../utils/renderWithRouter';
 
 describe('Login page', () => {
   test('login form is rende', () => {
-    render(
-      <AppContext>
+    const { history } = renderWithRouter(
+      <AppProvider>
         <App />
-      </AppContext>,
+      </AppProvider>,
     );
 
     const inputEmail = screen.getByTestId('common_login__input-email');
     const inputPassword = screen.getByTestId('common_login__input-password');
     const buttonLogin = screen.getByTestId('common_login__button-login');
 
+    expect(history.location.pathname).toBe('/login');
     expect(inputEmail).toBeInTheDocument();
     expect(inputPassword).toBeInTheDocument();
     expect(buttonLogin).toBeInTheDocument();
