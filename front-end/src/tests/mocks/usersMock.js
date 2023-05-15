@@ -9,8 +9,5 @@ export const customerDataWithToken = {
   name: 'Cliente Zé Birita',
   email: customerEmail,
   role: 'customer',
-  token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjozL
-  CJuYW1lIjoiQ2xpZW50ZSBaw6kgQmlyaXRhIiwiZW1haWwiOiJ6ZWJpcml0YUBlbWFp
-  bC5jb20iLCJyb2xlIjoiY3VzdG9tZXIifSwiaWF0IjoxNjgzOTg2MjU2LCJleHAiOjE
-  2ODM5ODk4NTZ9.7HvdKZNo5H1w-yOTFyIxfJsgRebe3NRIB4xc--X7p90`,
+  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjozLCJuYW1lIjoiQ2xpZW50ZSBaw6kgQmlyaXRhIiwiZW1haWwiOiJ6ZWJpcml0YUBlbWFpbC5jb20iLCJyb2xlIjoiY3VzdG9tZXIifSwiaWF0IjoxNjg0MTgyMzk1LCJleHAiOjE2ODQxODU5OTV9.dX_WQhG-fA51I54KI5xP9Xaa1ga-R5JBtjEz1-jbGJU',
 };
