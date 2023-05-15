@@ -1,17 +1,26 @@
 import React from 'react';
-import { screen, act } from '@testing-library/react';
+import { screen, act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { isExpired } from 'react-jwt';
 import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
 import App from '../App';
 import { loginCustomerData } from './mocks/usersMock';
 import AppProvider from '../context/AppProvider';
 import renderWithRouter from '../utils/renderWithRouter';
-import { requestLogin } from '../services/requests';
 
-jest.mock('axios');
+const BASE_URL = 'http://localhost:3000/';
 
 describe('Login page', () => {
+  let mock;
+
+  beforeAll(() => {
+    mock = new MockAdapter(axios);
+  });
+
+  afterEach(() => {
+    mock.reset();
+  });
+
   test('login form is rende', async () => {
     const { history } = renderWithRouter(
       <AppProvider>
@@ -44,7 +53,9 @@ describe('Login page', () => {
       </AppProvider>,
     );
 
-    axios.post.mockResolvedValueOnce(loginCustomerData.customerDataWithToken);
+    mock
+      .onPost(`${BASE_URL}/login`)
+      .reply(loginCustomerData.customerDataWithToken);
 
     const inputEmail = screen.getByTestId('common_login__input-email');
     const inputPassword = screen.getByTestId('common_login__input-password');
@@ -63,9 +74,11 @@ describe('Login page', () => {
       userEvent.click(buttonLogin);
     });
 
-    const productsBtn = await screen.queryByText(/produtos/i);
+    await waitFor(async () => {
+      const productsBtn = await screen.queryByText(/produtos/i);
 
-    // expect(productsBtn).toBeInTheDocument();
-    expect(history.location.pathname).toBe('/customer/products');
+      expect(productsBtn).toBeInTheDocument();
+      expect(history.location.pathname).toBe('/customer/products');
+    });
   });
 });
