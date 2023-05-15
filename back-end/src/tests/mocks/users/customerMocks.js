@@ -54,6 +54,11 @@ const adminData = {
   role: 'administrator',
 };
 
+const adminLoginData = {
+  email: ',adm@deliveryapp.com',
+  password: ',--adm2@21!!--',
+};
+
 const nameSeller1 = 'Pedro Cardoso';
 const emailSeller1 = 'pedro@deliveryapp.com';
 
@@ -87,6 +92,7 @@ module.exports = {
   newCustomerRegisteredData,
   customerRegisteredReturnWithToken,
   adminToken,
+  adminLoginData,
   adminData,
   sellerToken,
   sellerAdminRegisterData,

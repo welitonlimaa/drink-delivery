@@ -4,9 +4,9 @@ const chai = require('chai');
 
 const chaiHttp = require('chai-http');
 
-const app = require('../api/app');
+const JWT = require('jsonwebtoken');
 
-const JWT = require('../utils/authenticator');
+const app = require('../api/app');
 
 const { Users } = require('../database/models');
 
@@ -15,8 +15,7 @@ chai.use(chaiHttp);
 const { expect } = chai;
 
 const { 
-  loginCustomerData,
-  customerDataWithToken, 
+  loginCustomerData, 
   customerData, 
   customerRegisterData,
   customerRegisteredReturnWithToken,
@@ -27,6 +26,7 @@ const {
   adminToken,
   adminData,
   customerToken,
+  customerDataWithToken,
 } = require('./mocks/users/customerMocks');
 
 const routes = {
@@ -48,13 +48,13 @@ describe('Teste de integração Users', function () {
         sinon
           .stub(Users, 'findOne')
           .resolves(customerData);
-        sinon.stub(JWT, 'createToken').returns(customerDataWithToken.token);
+        sinon.stub(JWT, 'sign').returns(customerToken);
         const httpResponse = await chai.request(app)
           .post('/login')
           .send(body);
   
         expect(httpResponse.status).to.be.equal(200);
-        // expect(httpResponse.body).to.be.deep.equal(customerDataWithToken);
+        expect(httpResponse.body).to.be.deep.equal(customerDataWithToken);
       },
     );
   
@@ -103,14 +103,14 @@ describe('Teste de integração Users', function () {
         sinon
           .stub(Users, 'create')
           .resolves(newCustomerRegisteredData);
-        sinon.stub(JWT, 'createToken').returns(customerRegisteredReturnWithToken.token);
+        sinon.stub(JWT, 'sign').returns(customerRegisteredReturnWithToken.token);
 
         const httpResponse = await chai.request(app)
           .post(routes.customerRegister)
           .send(body);
   
         expect(httpResponse.status).to.be.equal(201);
-        // expect(httpResponse.body).to.be.deep.equal(customerDataWithToken);
+        expect(httpResponse.body).to.be.deep.equal(customerRegisteredReturnWithToken);
       },
     );
   
@@ -153,14 +153,14 @@ describe('Teste de integração Users', function () {
         const body = sellerAdminRegisterData;
         const headers = { authorization: adminToken };
 
-        sinon.stub(JWT, 'verifyToken').returns(adminData);
+        sinon.stub(JWT, 'verify').returns({ data: adminData });
         sinon
           .stub(Users, 'findOne')
           .resolves(undefined);
         sinon
           .stub(Users, 'create')
           .resolves(newSellerRegisteredData);
-        sinon.stub(JWT, 'createToken').returns(sellerRegisteredReturnWithToken.token);
+        sinon.stub(JWT, 'sign').returns(sellerRegisteredReturnWithToken.token);
 
         const httpResponse = await chai.request(app)
           .post(routes.adminRegister)
@@ -168,6 +168,7 @@ describe('Teste de integração Users', function () {
           .send(body);
   
         expect(httpResponse.status).to.be.equal(201);
+        expect(httpResponse.body).to.be.deep.equal(sellerRegisteredReturnWithToken);
       },
     );
     
@@ -176,8 +177,6 @@ describe('Teste de integração Users', function () {
       async function () {
         const body = sellerAdminRegisterData;
         const headers = { authorization: customerToken };
-
-        sinon.stub(JWT, 'verifyToken').returns(customerData);
 
         const httpResponse = await chai.request(app)
           .post(routes.adminRegister)
@@ -193,7 +192,7 @@ describe('Teste de integração Users', function () {
       async function () {
         const headers = { authorization: adminToken };
 
-        sinon.stub(JWT, 'verifyToken').returns(adminData);
+        sinon.stub(JWT, 'verify').returns({ data: adminData });
 
         const httpResponse = await chai.request(app)
           .post(routes.adminRegister)
@@ -210,7 +209,7 @@ describe('Teste de integração Users', function () {
         const body = sellerAdminRegisterData;
         const headers = { authorization: adminToken };
 
-        sinon.stub(JWT, 'verifyToken').returns(adminData);
+        sinon.stub(JWT, 'verify').returns({ data: adminData });
         sinon
           .stub(Users, 'findOne')
           .resolves(true);

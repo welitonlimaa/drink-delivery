@@ -11,8 +11,6 @@ const registerSale = async (req, res) => {
 const getById = async (req, res) => {
   const { id } = req.params;
 
-  console.log('teste1');
-
   const order = await saleService.getById(Number(id));
 
   return res.status(200).json(order);
