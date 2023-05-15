@@ -1,6 +1,6 @@
 const customerToken = require('../tokens/customerToken.json');
 
-const invalidDataResponse = {
+export const invalidDataResponse = {
   message: '"email" must be a valid email',
 };
 
@@ -18,8 +18,14 @@ export const customerDataWithToken = {
   token: customerToken,
 };
 
+export const notRegistredUser = {
+  email: 'notregistred@gmail.com',
+  password: 'notregistred',
+};
+
 module.exports = {
   invalidDataResponse,
   loginCustomerData,
   customerDataWithToken,
+  notRegistredUser,
 };

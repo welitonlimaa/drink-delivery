@@ -26,7 +26,7 @@ function Login() {
     } catch (error) {
       setIsValid(false);
       changeAuthorized(true);
-      console.log(error);
+      // console.log(error);
     }
   };
 
