@@ -1,4 +1,8 @@
-import customerToken from './tokens/customerToken.json';
+const customerToken = require('../tokens/customerToken.json');
+
+const invalidDataResponse = {
+  message: '"email" must be a valid email',
+};
 
 const customerEmail = 'zebirita@email.com';
 
@@ -12,4 +16,10 @@ export const customerDataWithToken = {
   email: customerEmail,
   role: 'customer',
   token: customerToken,
+};
+
+module.exports = {
+  invalidDataResponse,
+  loginCustomerData,
+  customerDataWithToken,
 };
