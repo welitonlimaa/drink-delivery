@@ -55,8 +55,8 @@ const adminData = {
 };
 
 const adminLoginData = {
-  email: ',adm@deliveryapp.com',
-  password: ',--adm2@21!!--',
+  email: 'adm@deliveryapp.com',
+  password: '--adm2@21!!--',
 };
 
 const nameSeller1 = 'Pedro Cardoso';
