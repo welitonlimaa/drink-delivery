@@ -9,59 +9,219 @@ const app = require('../api/app');
 const JWT = require('../utils/authenticator');
 
 const { Users } = require('../database/models');
-const { loginCustomerData, customerDataWithToken, 
-  customerData } = require('./mocks/users/customerMocks');
 
 chai.use(chaiHttp);
 
 const { expect } = chai;
 
+const { 
+  loginCustomerData,
+  customerDataWithToken, 
+  customerData, 
+  customerRegisterData,
+  customerRegisteredReturnWithToken,
+  newCustomerRegisteredData,
+  newSellerRegisteredData,
+  sellerRegisteredReturnWithToken,
+  sellerAdminRegisterData,
+  adminToken,
+  adminData,
+  customerToken,
+} = require('./mocks/users/customerMocks');
+
+const routes = {
+  login: '/login',
+  customerRegister: '/users/register',
+  adminRegister: '/users/admin/register',
+};
+
 describe('Teste de integração Users', function () {
-  afterEach(function () {
-    sinon.restore();
+  describe('Teste de integração Login', function () {
+    afterEach(function () {
+      sinon.restore();
+    });
+  
+    it(
+      'request in /login route with customer data returns user data with success',
+      async function () {
+        const body = loginCustomerData;
+        sinon
+          .stub(Users, 'findOne')
+          .resolves(customerData);
+        sinon.stub(JWT, 'createToken').returns(customerDataWithToken.token);
+        const httpResponse = await chai.request(app)
+          .post('/login')
+          .send(body);
+  
+        expect(httpResponse.status).to.be.equal(200);
+        // expect(httpResponse.body).to.be.deep.equal(customerDataWithToken);
+      },
+    );
+  
+    it(
+      'request in /login route with customer invalid format data returns error with status 400',
+      async function () {
+        const body = {};
+
+        const httpResponse = await chai.request(app)
+          .post('/login')
+          .send(body);
+  
+        expect(httpResponse.status).to.be.equal(400);
+      },
+    );
+  
+    it(
+      'request in /login route with customer invalid data returns error with status 404',
+      async function () {
+        const body = customerData;
+        sinon
+          .stub(Users, 'findOne')
+          .resolves({});
+
+        const httpResponse = await chai.request(app)
+          .post('/login')
+          .send(body);
+  
+        expect(httpResponse.status).to.be.equal(404);
+      },
+    );  
   });
 
-  it(
-    'request in /login route with customer data returns user data with success',
-    async function () {
-      const body = loginCustomerData;
-      sinon
-        .stub(Users, 'findOne')
-        .resolves(customerData);
-      sinon.stub(JWT, 'createToken').returns(customerDataWithToken.token);
-      const httpResponse = await chai.request(app)
-        .post('/login')
-        .send(body);
+  describe('Teste de integração Register', function () {
+    afterEach(function () {
+      sinon.restore();
+    });
+  
+    it(
+      'create a new customer with customer valid data with success',
+      async function () {
+        const body = customerRegisterData;
+        sinon
+          .stub(Users, 'findOne')
+          .resolves(undefined);
+        sinon
+          .stub(Users, 'create')
+          .resolves(newCustomerRegisteredData);
+        sinon.stub(JWT, 'createToken').returns(customerRegisteredReturnWithToken.token);
 
-      expect(httpResponse.status).to.be.equal(200);
-      // expect(httpResponse.body).to.be.deep.equal(customerDataWithToken);
-    },
-  );
+        const httpResponse = await chai.request(app)
+          .post(routes.customerRegister)
+          .send(body);
+  
+        expect(httpResponse.status).to.be.equal(201);
+        // expect(httpResponse.body).to.be.deep.equal(customerDataWithToken);
+      },
+    );
+  
+    it(
+      'try create a new customer with customer invalid format data',
+      async function () {
+        const httpResponse = await chai.request(app)
+          .post(routes.customerRegister)
+          .send({});
+  
+        expect(httpResponse.status).to.be.equal(400);
+      },
+    );
 
-  it(
-    'request in /login route with customer invalid format data returns error with status 400',
-    async function () {
-      const body = {};
-      const httpResponse = await chai.request(app)
-        .post('/login')
-        .send(body);
+    it(
+      'try create of new customer with customer data already registered',
+      async function () {
+        const body = customerRegisterData;
+        sinon
+          .stub(Users, 'findOne')
+          .resolves(newCustomerRegisteredData);
+        
+        const httpResponse = await chai.request(app)
+          .post(routes.customerRegister)
+          .send(body);
+  
+        expect(httpResponse.status).to.be.equal(409);
+      },
+    );
+  });
 
-      expect(httpResponse.status).to.be.equal(400);
-    },
-  );
+  describe('Teste de integração Admin Register', function () {
+    afterEach(function () {
+      sinon.restore();
+    });
+  
+    it(
+      'create a new seller with seller valid data with success',
+      async function () {
+        const body = sellerAdminRegisterData;
+        const headers = { authorization: adminToken };
 
-  it(
-    'request in /login route with customer invalid data returns error with status 404',
-    async function () {
-      const body = customerData;
-      sinon
-        .stub(Users, 'findOne')
-        .resolves({});
-      const httpResponse = await chai.request(app)
-        .post('/login')
-        .send(body);
+        sinon.stub(JWT, 'verifyToken').returns(adminData);
+        sinon
+          .stub(Users, 'findOne')
+          .resolves(undefined);
+        sinon
+          .stub(Users, 'create')
+          .resolves(newSellerRegisteredData);
+        sinon.stub(JWT, 'createToken').returns(sellerRegisteredReturnWithToken.token);
 
-      expect(httpResponse.status).to.be.equal(404);
-    },
-  );
+        const httpResponse = await chai.request(app)
+          .post(routes.adminRegister)
+          .set(headers)
+          .send(body);
+  
+        expect(httpResponse.status).to.be.equal(201);
+      },
+    );
+    
+    it(
+      'try create a seller with no admin token',
+      async function () {
+        const body = sellerAdminRegisterData;
+        const headers = { authorization: customerToken };
+
+        sinon.stub(JWT, 'verifyToken').returns(customerData);
+
+        const httpResponse = await chai.request(app)
+          .post(routes.adminRegister)
+          .set(headers)
+          .send(body);
+  
+        expect(httpResponse.status).to.be.equal(401);
+      },
+    );
+
+    it(
+      'try create a new seller with invalid format seller data',
+      async function () {
+        const headers = { authorization: adminToken };
+
+        sinon.stub(JWT, 'verifyToken').returns(adminData);
+
+        const httpResponse = await chai.request(app)
+          .post(routes.adminRegister)
+          .set(headers)
+          .send({});
+  
+        expect(httpResponse.status).to.be.equal(400);
+      },
+    );
+
+    it(
+      'try create a new seller with data already registered',
+      async function () {
+        const body = sellerAdminRegisterData;
+        const headers = { authorization: adminToken };
+
+        sinon.stub(JWT, 'verifyToken').returns(adminData);
+        sinon
+          .stub(Users, 'findOne')
+          .resolves(true);
+
+        const httpResponse = await chai.request(app)
+          .post(routes.adminRegister)
+          .set(headers)
+          .send(body);
+  
+        expect(httpResponse.status).to.be.equal(409);
+      },
+    );
+  });
 });
