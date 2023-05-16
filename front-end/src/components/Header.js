@@ -9,22 +9,25 @@ function Header() {
   return (
     <header>
       <nav
-        className="flex items-center bg-green-700 h-16 text-white font-bold"
+        className="flex items-center h-16 text-flamingo-50 font-bold uppercase
+        bg-flamingo-500"
       >
         {
           role === 'customer'
             ? (
-              <div className=" flex grow">
+              <div className="flex grow h-full">
                 <Link
                   to="/customer/products"
-                  className="p-3 flex items-center h-full text-sm"
+                  className="flex items-center justify-center h-full min-w-[25%] p-3
+                  border-r border-r-flamingo-50 text-sm"
                   data-testid="customer_products__element-navbar-link-products"
                 >
                   Produtos
                 </Link>
                 <Link
                   to="/customer/orders"
-                  className="p-3 flex items-center grow h-full text-sm"
+                  className="flex items-center justify-center h-full min-w-[25%] p-3
+                  border-r border-r-flamingo-50 text-sm"
                   data-testid="customer_products__element-navbar-link-orders"
                 >
                   Meus Pedidos
@@ -36,30 +39,37 @@ function Header() {
         {
           role === 'administrator'
             ? (
-              <Link
-                to="/admin/manage"
-                className="p-3 flex items-center grow h-full text-sm"
-                data-testid="customer_products__element-navbar-link-orders"
-              >
-                Gerênciar usuários
-              </Link>
+              <div className="flex grow h-full">
+                <Link
+                  to="/admin/manage"
+                  className="flex items-center justify-center h-full min-w-[25%] p-3
+                  border-r border-r-flamingo-50 text-sm"
+                  data-testid="customer_products__element-navbar-link-orders"
+                >
+                  Gerênciar usuários
+                </Link>
+              </div>
             ) : null
         }
         {
           role === 'seller'
             ? (
-              <Link
-                to="/seller/orders"
-                className="p-3 flex items-center grow h-full text-sm"
-                data-testid="customer_products__element-navbar-link-orders"
-              >
-                Pedidos
-              </Link>
+              <div className="flex grow h-full">
+                <Link
+                  to="/seller/orders"
+                  className="flex items-center justify-center grow-1 h-full min-w-[25%]
+                  p-3 border-r border-r-flamingo-50 text-sm"
+                  data-testid="customer_products__element-navbar-link-orders"
+                >
+                  Pedidos
+                </Link>
+              </div>
             ) : null
         }
         <span
           to="/customer/products"
-          className="bg-indigo-800 h-full p-3 flex items-center text-sm"
+          className="flex items-center justify-center h-full min-w-[25%] p-3
+          border-x border-x-flamingo-50 text-sm"
           data-testid="customer_products__element-navbar-user-full-name"
         >
           {
@@ -69,7 +79,8 @@ function Header() {
         <Link
           to="/login"
           onClick={ clearLocalStorage }
-          className="p-3 flex items-center bg-blue-600 h-full text-sm"
+          className="flex items-center justify-center h-full min-w-[15%] p-3
+          text-sm"
           data-testid="customer_products__element-navbar-link-logout"
         >
           Sair
