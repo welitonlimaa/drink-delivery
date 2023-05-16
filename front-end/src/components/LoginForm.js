@@ -3,16 +3,17 @@ import PropTypes from 'prop-types';
 function LoginForm({ login, handleClick, fields, setFormFields, isValid, unauthorized }) {
   return (
     <form
-      className="flex flex-col justify-center rounded shadow-lg p-12"
+      className="flex flex-col items-center justify-center
+      w-3/4 max-[640px]:w-96 p-5 max-[640px]:p-10 font-normal"
       action=""
     >
       <label
-        className="font-semibold text-xs"
+        className="w-full"
         htmlFor="email-input"
       >
-        Username or Email
+        Email
         <input
-          className="flex items-center h-12 px-4 w-64 bg-gray-200 mt-2
+          className="flex items-center h-12 px-4 w-full bg-gray-200 mt-2
           rounded focus:outline-none focus:ring-2"
           type="text"
           id="email-input"
@@ -23,12 +24,12 @@ function LoginForm({ login, handleClick, fields, setFormFields, isValid, unautho
         />
       </label>
       <label
-        className="font-semibold text-xs mt-3"
+        className="w-full mt-3"
         htmlFor="password-input"
       >
         Password
         <input
-          className="flex items-center h-12 px-4 w-64
+          className="flex items-center h-12 px-4 w-full
           bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2"
           type="password"
           name="password"
@@ -43,19 +44,18 @@ function LoginForm({ login, handleClick, fields, setFormFields, isValid, unautho
         disabled={ !isValid }
         onClick={ (e) => login(e) }
         data-testid="common_login__button-login"
-        className="flex items-center justify-center h-12 px-6 w-64 bg-blue-600
-        mt-8 rounded font-semibold text-sm text-blue-100 hover:bg-blue-700
-        bg-flamingo-500"
+        className="flex items-center justify-center h-12 px-6 w-full bg-blue-600
+        mt-8 rounded-md text-white font-semibold bg-flamingo-500"
       >
         Login
       </button>
-      <div className="flex mt-6 justify-center text-xs">
+      <div className="flex justify-center mt-6">
         <button
           name="register"
           onClick={ () => handleClick('/register') }
           data-testid="common_login__button-register"
           type="button"
-          className="text-blue-400 hover:text-blue-500 bg-flamingo-500"
+          className="font-medium"
         >
           Ainda não tenho conta
         </button>

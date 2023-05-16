@@ -60,11 +60,14 @@ function Login() {
         <img className="w-16" src={ logo } alt="logo" />
       </header>
       <div className="flex items-center justify-around w-full min-h-screen">
-        <div className="w-1/3">
+        <div className="w-1/3 max-[640px]:hidden">
           <img className="w-full" src={ takeaway } alt="take away gif" />
         </div>
-        <div className="flex justify-center font-normal">
-          <h1>Login</h1>
+        <div
+          className="flex flex-col justify-center items-center w-1/3
+          p-8 min-[641px]:-ml-32 max-[640px]:min-w-full font-normal text-gray-900"
+        >
+          <h1 className="inline-block w-full text-center font-bold text-3xl">Login</h1>
           <LoginForm
             login={ login }
             handleClick={ handleClick }
