@@ -1,5 +1,5 @@
 import React from 'react';
-import { screen, waitFor } from '@testing-library/react';
+import { screen, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
@@ -20,13 +20,13 @@ const dataTestId = {
   cardImg: 'customer_products__img-card-bg-image-1',
   cardTitle: 'customer_products__element-card-title-1',
   cardPrice: 'customer_products__element-card-price-1',
-  cardMinus: 'customer_products__button-card-rm-item-1',
-  cardPlus: 'customer_products__button-card-add-item-1',
+  minusBtn: 'customer_products__button-card-rm-item-1',
+  plusBtn: 'customer_products__button-card-add-item-1',
   cardQuantity: 'customer_products__input-card-quantity-1',
   cartTotal: 'customer_products__checkout-bottom-value',
 };
 
-describe('Login page', () => {
+describe('Products page', () => {
   let mock;
 
   beforeAll(() => {
@@ -77,11 +77,11 @@ describe('Login page', () => {
         const cardPrice = screen
           .getByTestId(dataTestId.cardPrice);
 
-        const cardMinus = screen
-          .getByTestId(dataTestId.cardMinus);
+        const minusBtn = screen
+          .getByTestId(dataTestId.minusBtn);
 
-        const cardPlus = screen
-          .getByTestId(dataTestId.cardPlus);
+        const plusBtn = screen
+          .getByTestId(dataTestId.plusBtn);
 
         const cardQuantity = screen
           .getByTestId(dataTestId.cardQuantity);
@@ -99,18 +99,19 @@ describe('Login page', () => {
         expect(cardImg).toHaveAttribute('alt', 'Skol Lata 250ml');
         expect(cardPrice).toHaveTextContent(/2,20/i);
         expect(cardTitle).toHaveTextContent(/Skol Lata 250ml/i);
-        expect(cardMinus).toBeInTheDocument();
-        expect(cardPlus).toBeInTheDocument();
+        expect(minusBtn).toBeInTheDocument();
+        expect(plusBtn).toBeInTheDocument();
         expect(cardQuantity).toBeInTheDocument();
         expect(cartBtn).toBeInTheDocument();
         expect(cartTotal).toBeInTheDocument();
         expect(cartTotal).toHaveTextContent('0,00');
+        userEvent.click(logoutBtn);
       });
     },
   );
 
   test(
-    'ao carregar a página de produtos, todos os elementos são renderizados',
+    'é possível adicionar produtos ao carrinho',
     async () => {
       renderWithRouter(
         <AppProvider>
@@ -126,32 +127,39 @@ describe('Login page', () => {
       userEvent.type(inputPassword, loginCustomerData.password);
       userEvent.click(buttonLogin);
 
-      await waitFor(async () => {
-        // const cardMinus = screen
-        //   .getByTestId('customer_products__button-card-rm-item-1');
+      await waitForElementToBeRemoved(inputEmail);
 
-        const cardPlus = screen
-          .getByTestId('customer_products__button-card-add-item-1');
+      const logoutBtn = screen
+        .getByTestId('customer_products__element-navbar-link-logout');
 
-        // const cardQuantity = screen
-        //   .getByTestId('customer_products__input-card-quantity-1');
+      expect(logoutBtn).toBeInTheDocument();
 
-        const cartBtn = screen
-          .getByTestId('customer_products__button-cart');
+      const cartTotal = screen
+        .getByTestId(dataTestId.cartTotal);
+      expect(cartTotal).toBeInTheDocument();
+      expect(cartTotal).toHaveTextContent('0,00');
 
-        expect(cartBtn).toBeInTheDocument();
+      const plusBtn = await screen
+        .findByTestId('customer_products__button-card-add-item-1');
 
-        userEvent.click(cardPlus);
+      userEvent.dblClick(plusBtn);
 
-        const cardNewQuantity = screen
-          .getByTestId(dataTestId.cardQuantity);
+      const sumTotal = await screen
+        .findByTestId(dataTestId.cartTotal);
+      expect(sumTotal).toBeInTheDocument();
+      expect(sumTotal).toHaveTextContent('4,40');
 
-        expect(cardNewQuantity.value).toBe('1');
+      const minusBtn = await screen
+        .findByTestId(dataTestId.minusBtn);
 
-        const cartNewTotal = screen
-          .getByTestId(dataTestId.cartTotal);
-        expect(cartNewTotal).toHaveTextContent('2,20');
-      });
+      userEvent.dblClick(minusBtn);
+
+      userEvent.click(minusBtn);
+
+      const minusTotal = await screen
+        .findByTestId(dataTestId.cartTotal);
+      expect(minusTotal).toBeInTheDocument();
+      expect(minusTotal).toHaveTextContent('0,00');
     },
   );
 });

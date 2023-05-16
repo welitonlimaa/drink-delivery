@@ -25,7 +25,7 @@ const REGISTER_ENDPOINT = '/register';
 
 const NEW_ENDPOINT = '/customer/products';
 
-describe('Login page', () => {
+describe('Register page', () => {
   let mock;
 
   beforeAll(() => {
