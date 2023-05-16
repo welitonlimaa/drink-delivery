@@ -62,7 +62,7 @@ function ProductCard({ id, urlImage, name, price, quantity, updateProductCart })
             onChange={ (e) => setProductQuantity(e.target.value) }
             min="0"
             data-testid={ `customer_products__input-card-quantity-${id}` }
-            className="max-w-[10%] text-gray-500 text-center select-none"
+            className="min-w-[10%] max-w-[15%] text-gray-500 text-center select-none"
           />
           <button
             type="button"
