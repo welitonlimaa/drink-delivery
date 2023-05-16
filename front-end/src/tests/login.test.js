@@ -10,7 +10,7 @@ import {
   loginCustomerData,
   notRegistredUser,
   invalidDataResponse,
-} from './mocks/login/login.mock';
+} from './mocks/login/customer.mock';
 
 const BASE_URL = 'http://localhost:3000/';
 

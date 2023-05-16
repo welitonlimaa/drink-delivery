@@ -1,5 +1,5 @@
 const customerToken = require('../tokens/customerToken.json');
-const { customerDataWithToken } = require('../login/login.mock');
+const { customerDataWithToken } = require('../login/customer.mock');
 
 const newSaleData = {
   sellerId: 2,
