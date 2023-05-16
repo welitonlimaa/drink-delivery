@@ -71,7 +71,7 @@ function AdminManage() {
         {
           hasError ? (
             <p data-testid="admin_manage__element-invalid-register">
-              Error
+              Error data
             </p>
           )
             : null
