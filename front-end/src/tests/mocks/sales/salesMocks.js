@@ -1,5 +1,5 @@
-const customerToken = require('../users/tokens/customerToken.json');
-const { customerData } = require('../users/customerMocks');
+const customerToken = require('../tokens/customerToken.json');
+const { customerDataWithToken } = require('../login/customer.mock');
 
 const newSaleData = {
   sellerId: 2,
@@ -78,7 +78,7 @@ const customerOrders = [
 
 module.exports = {
   customerToken,
-  customerData,
+  customerDataWithToken,
   newSaleData,
   newOrderCreated,
   customerOrders,
