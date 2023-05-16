@@ -21,35 +21,38 @@ function ProductCard({ id, urlImage, name, price, quantity, updateProductCart })
 
   return (
     <div
-      className="w-80 bg-white shadow rounded"
+      className="w-80 my-2 border-2 shadow-md shadow-gray-400 rounded-2xl
+      bg-white hover:brightness-105"
     >
+      <div className="inline-block m-2">
+        <p
+          data-testid={ `customer_products__element-card-price-${id}` }
+          className="p-1 rounded text-center font-semibold text-gray-800 mt-1
+          bg-flamingo-300"
+        >
+          {`R$ ${price.replace(/\./, ',')}`}
+        </p>
+      </div>
       <img
         src={ urlImage }
         alt={ name }
         data-testid={ `customer_products__img-card-bg-image-${id}` }
-        className="w-full"
+        className="inline w-full"
       />
-      <div className="p-4 flex flex-col items-center">
+      <div className="flex flex-col items-center p-4 rounded bg-gray-100">
         <h1
           data-testid={ `customer_products__element-card-title-${id}` }
           className="text-gray-800 text-center mt-1"
         >
           { name }
         </h1>
-        <p
-          data-testid={ `customer_products__element-card-price-${id}` }
-          className="text-center text-gray-800 mt-1"
-        >
-          { price.replace(/\./, ',') }
-        </p>
-        <div className="inline-flex items-center mt-2">
+        <div className="inline-flex items-center justify-center mt-2">
           <button
             type="button"
             onClick={ minus }
             data-testid={ `customer_products__button-card-rm-item-${id}` }
-            className="bg-white rounded-l border text-gray-600
-            hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50
-            inline-flex items-center px-2 py-1 border-r border-gray-200"
+            className="w-[10%] rounded mx-1 text-flamingo-50 text-center select-none
+            bg-flamingo-500"
           >
             -
           </button>
@@ -59,16 +62,14 @@ function ProductCard({ id, urlImage, name, price, quantity, updateProductCart })
             onChange={ (e) => setProductQuantity(e.target.value) }
             min="0"
             data-testid={ `customer_products__input-card-quantity-${id}` }
-            className="bg-gray-100 border-t border-b border-gray-100 text-gray-600
-            hover:bg-gray-100 inline-flex items-center px-4 py-1 select-none"
+            className="max-w-[10%] text-gray-500 text-center select-none"
           />
           <button
             type="button"
             onClick={ plus }
             data-testid={ `customer_products__button-card-add-item-${id}` }
-            className="bg-white rounded-r border text-gray-600 hover:bg-gray-100
-            active:bg-gray-200 disabled:opacity-50 inline-flex items-center px-2 py-1
-            border-r border-gray-200"
+            className="w-[10%] rounded mx-1 text-flamingo-50 text-center select-none
+            bg-flamingo-500"
           >
             +
           </button>
