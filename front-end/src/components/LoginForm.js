@@ -13,8 +13,8 @@ function LoginForm({ login, handleClick, fields, setFormFields, isValid, unautho
       >
         Email
         <input
-          className="flex items-center h-12 px-4 w-full bg-gray-200 mt-2
-          rounded focus:outline-none focus:ring-2"
+          className="flex items-center h-12 px-4 w-full mt-2
+          border-solid border border-black rounded bg-white"
           type="text"
           id="email-input"
           name="email"
@@ -29,8 +29,8 @@ function LoginForm({ login, handleClick, fields, setFormFields, isValid, unautho
       >
         Password
         <input
-          className="flex items-center h-12 px-4 w-full
-          bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2"
+          className="flex items-center h-12 px-4 w-full mt-2
+          border-solid border border-black rounded bg-white"
           type="password"
           name="password"
           id="password-input"
@@ -55,7 +55,7 @@ function LoginForm({ login, handleClick, fields, setFormFields, isValid, unautho
           onClick={ () => handleClick('/register') }
           data-testid="common_login__button-register"
           type="button"
-          className="font-medium"
+          className="hover:underline font-bold"
         >
           Ainda não tenho conta
         </button>

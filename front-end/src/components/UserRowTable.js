@@ -2,11 +2,11 @@ import PropTypes from 'prop-types';
 
 function UserRowTable({ item, id, name, email, role, deleteUser }) {
   return (
-    <tr className="border-b dark:border-neutral-500">
+    <tr className="border-b dark:border-neutral-500 font-normal">
       <th
         scope="row"
         data-testid={ `admin_manage__element-user-table-item-number-${item}` }
-        className="whitespace-nowrap px-6 py-4 font-medium"
+        className="whitespace-nowrap px-6 py-4"
       >
         { item + 1 }
       </th>

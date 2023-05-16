@@ -77,14 +77,19 @@ function AdminManage() {
             : null
         }
       </div>
-      <div className="my-14">
+      <div
+        className="flex items-center justify-center w-full my-14
+        text-gray-900 font-normal"
+      >
         <RegisterForm
           register={ register }
           fields={ fields }
           setFormFields={ setFormFields }
         />
       </div>
-      <div className="flex flex-col overflow-x-auto">
+      <div
+        className="flex flex-col overflow-x-auto p-10 text-gray-900 font-normal"
+      >
         <UsersTable users={ users } deleteUser={ deleteUser } />
       </div>
     </>
