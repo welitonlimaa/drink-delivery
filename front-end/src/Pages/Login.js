@@ -6,6 +6,8 @@ import logo from '../images/logo.png';
 import dataValidate from '../utils/dataValidate';
 import { requestLogin } from '../services/requests';
 import routes from '../json/routes.json';
+import takeaway from '../images/gifs/takeaway.gif';
+import LoginForm from '../components/LoginForm';
 
 function Login() {
   const { fields, setFormFields, userData, setUserData } = useContext(AppContext);
@@ -51,73 +53,29 @@ function Login() {
   if (isLogged) return <Redirect to={ `${routes[userData.role]}` } />;
 
   return (
-    <div className="flex justify-center">
-      <form
-        className="flex flex-col justify-center bg-white rounded shadow-lg p-12"
-        action=""
+    <>
+      <header
+        className="w-full h-16 bg-flamingo-500"
       >
-        <img className="w-200 mr-2" src={ logo } alt="logo" />
-        <label
-          className="font-semibold text-xs"
-          htmlFor="email-input"
-        >
-          Username or Email
-          <input
-            className="flex items-center h-12 px-4 w-64 bg-gray-200 mt-2
-            rounded focus:outline-none focus:ring-2"
-            type="text"
-            id="email-input"
-            name="email"
-            value={ fields.email }
-            onChange={ setFormFields }
-            data-testid="common_login__input-email"
-          />
-        </label>
-        <label
-          className="font-semibold text-xs mt-3"
-          htmlFor="password-input"
-        >
-          Password
-          <input
-            className="flex items-center h-12 px-4 w-64
-            bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2"
-            type="password"
-            name="password"
-            id="password-input"
-            value={ fields.password }
-            onChange={ setFormFields }
-            data-testid="common_login__input-password"
-          />
-        </label>
-        <button
-          type="button"
-          disabled={ !isValid }
-          onClick={ (e) => login(e) }
-          data-testid="common_login__button-login"
-          className="flex items-center justify-center h-12 px-6 w-64 bg-blue-600
-          mt-8 rounded font-semibold text-sm text-blue-100 hover:bg-blue-700
-          bg-flamingo-500"
-        >
-          Login
-        </button>
-        <div className="flex mt-6 justify-center text-xs">
-          <button
-            name="register"
-            onClick={ () => handleClick('/register') }
-            data-testid="common_login__button-register"
-            type="button"
-            className="text-blue-400 hover:text-blue-500 bg-flamingo-500"
-          >
-            Ainda não tenho conta
-          </button>
+        <img className="w-16" src={ logo } alt="logo" />
+      </header>
+      <div className="flex items-center justify-around w-full min-h-screen">
+        <div className="w-1/3">
+          <img className="w-full" src={ takeaway } alt="take away gif" />
         </div>
-        {
-          unauthorized
-            ? <p data-testid="common_login__element-invalid-email">Dados Inválidos</p>
-            : null
-        }
-      </form>
-    </div>
+        <div className="flex justify-center font-normal">
+          <h1>Login</h1>
+          <LoginForm
+            login={ login }
+            handleClick={ handleClick }
+            fields={ fields }
+            setFormFields={ setFormFields }
+            isValid={ isValid }
+            unauthorized={ unauthorized }
+          />
+        </div>
+      </div>
+    </>
   );
 }
 
