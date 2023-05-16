@@ -95,17 +95,18 @@ function Login() {
           onClick={ (e) => login(e) }
           data-testid="common_login__button-login"
           className="flex items-center justify-center h-12 px-6 w-64 bg-blue-600
-          mt-8 rounded font-semibold text-sm text-blue-100 hover:bg-blue-700"
+          mt-8 rounded font-semibold text-sm text-blue-100 hover:bg-blue-700
+          bg-flamingo-500"
         >
           Login
         </button>
         <div className="flex mt-6 justify-center text-xs">
           <button
-            className="text-blue-400 hover:text-blue-500"
             name="register"
             onClick={ () => handleClick('/register') }
             data-testid="common_login__button-register"
             type="button"
+            className="text-blue-400 hover:text-blue-500 bg-flamingo-500"
           >
             Ainda não tenho conta
           </button>
