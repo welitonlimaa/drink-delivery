@@ -14,8 +14,8 @@ function RegisterForm({ register, fields, setFormFields }) {
 
   return (
     <form
-      className="w-4/5 mx-auto p-3 rounded-lg flex flex-wrap
-      justify-center gap-y-10 bg-slate-200"
+      className="flex flex-wrap justify-center w-4/6 p-5
+      border-solid border border-gray-400 rounded gap-y-10 shadow-md"
       action="#"
     >
       <div className="flex flex-wrap justify-center w-full gap-x-10">
@@ -35,7 +35,7 @@ function RegisterForm({ register, fields, setFormFields }) {
             value={ fields.name }
             onChange={ setFormFields }
             className="p-2 max-[640px]:w-full -mx-1
-            my-1.5 text-lg rounded-lg border font-normal"
+            my-1.5 text-lg rounded-lg border-solid border border-black"
           />
         </label>
         <label
@@ -54,7 +54,7 @@ function RegisterForm({ register, fields, setFormFields }) {
             value={ fields.email }
             onChange={ setFormFields }
             className="p-2 max-[640px]:w-full -mx-1
-            my-1.5 text-lg rounded-lg border font-normal"
+            my-1.5 text-lg rounded-lg border-solid border border-black"
           />
         </label>
         <label
@@ -73,7 +73,7 @@ function RegisterForm({ register, fields, setFormFields }) {
             onChange={ setFormFields }
             data-testid="admin_manage__input-password"
             className="p-2 max-[640px]:w-full -mx-1
-            my-1.5 text-lg rounded-lg border font-normal"
+            my-1.5 text-lg rounded-lg border-solid border border-black"
           />
         </label>
         <div
@@ -103,8 +103,7 @@ function RegisterForm({ register, fields, setFormFields }) {
           onClick={ (e) => register(e) }
           data-testid="admin_manage__button-register"
           className="flex items-center justify-center h-12 p-3 w-32 my-5 rounded
-          font-semibold text-sm bg-blue-600 text-blue-100 hover:bg-blue-700
-          disabled:bg-red-500"
+          text-lg text-white font-bold bg-green-800 disabled:bg-gray-500"
         >
           Cadastrar
         </button>
