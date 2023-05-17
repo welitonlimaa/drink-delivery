@@ -50,7 +50,7 @@ function CheckoutForm() {
   return (
     <form
       className="flex flex-wrap justify-center w-4/6 max-[640px]:w-96 p-5
-      max-[640px]:p-3 border-solid border border-gray-400 rounded gap-y-10 shadow-md"
+      max-[640px]:p-3 border-solid border border-gray-400 shadow-md rounded gap-y-10"
     >
       <p className="uppercase font-bold">Detalhes e Endereço para Entrega</p>
       <div className="flex flex-wrap justify-center w-full gap-x-10">
