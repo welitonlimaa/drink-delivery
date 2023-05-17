@@ -27,13 +27,14 @@ function OrderTable({ products }) {
       </thead>
       <tbody>
         {
-          products.map(({ id, name, price, SalesProducts }, index) => (
+          products.map(({ id, name, price, urlImage, SalesProducts }, index) => (
             <ProductTable
               key={ index }
               item={ index }
               id={ id }
               name={ name }
               price={ price }
+              urlImage={ urlImage }
               quantity={ SalesProducts.quantity }
               hasButton={ false }
             />))

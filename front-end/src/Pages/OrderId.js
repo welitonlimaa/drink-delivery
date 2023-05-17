@@ -119,18 +119,25 @@ function OrderId() {
             )
         }
       </div>
-      <div>
-        <OrderTable products={ orderData.products } />
+      <div className="my-12 max-[640px]:mx-5">
+        <div className="flex flex-col overflow-x-auto">
+          <OrderTable products={ orderData.products } />
+        </div>
+        <div className="flex justify-end min-[641px]:w-full min-[641px]:-ml-8">
+          <p
+            className="w-80 max-[640px]:w-full p-5 my-10
+            rounded-lg font-bold text-center text-3xl text-white bg-flamingo-500"
+          >
+            Total: R$
+            {' '}
+            <span
+              data-testid={ `${testPrefix}element-order-total-price` }
+            >
+              { (total.toFixed(2)).replace(/\./, ',') }
+            </span>
+          </p>
+        </div>
       </div>
-      <p>
-        Total: R$
-        {' '}
-        <span
-          data-testid={ `${testPrefix}element-order-total-price` }
-        >
-          { (total.toFixed(2)).replace(/\./, ',') }
-        </span>
-      </p>
     </>
   );
 }

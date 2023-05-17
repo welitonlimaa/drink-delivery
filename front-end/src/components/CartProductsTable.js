@@ -48,13 +48,14 @@ function CartProductsTable({ setTotal }) {
       </thead>
       <tbody>
         {
-          productsCart.map(({ id, name, price, quantity }, index) => (
+          productsCart.map(({ id, name, price, quantity, urlImage }, index) => (
             <ProductTable
               key={ index }
               item={ index }
               id={ id }
               name={ name }
               price={ price }
+              urlImage={ urlImage }
               hasButton
               quantity={ quantity }
               remove={ remove }

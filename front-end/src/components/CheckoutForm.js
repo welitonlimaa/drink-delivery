@@ -49,14 +49,14 @@ function CheckoutForm() {
 
   return (
     <form
-      className="w-4/5 mx-auto p-3 rounded-lg flex flex-wrap
-      justify-center gap-y-10 bg-slate-200"
+      className="flex flex-wrap justify-center w-4/6 max-[640px]:w-96 p-5
+      max-[640px]:p-3 border-solid border border-gray-400 rounded gap-y-10 shadow-md"
     >
       <p className="uppercase font-bold">Detalhes e Endereço para Entrega</p>
       <div className="flex flex-wrap justify-center w-full gap-x-10">
-        <div className="w-60 inline-block">
+        <div className="w-60 max-[640px]:w-full inline-block">
           <p
-            className="w-full block uppercase tracking-wide text-gray-700
+            className="w-full block uppercase tracking-wide
             text-xs font-bold mb-2"
           >
             P. Vendedora Responsável:
@@ -73,8 +73,8 @@ function CheckoutForm() {
           </div>
         </div>
         <label
-          className="w-60 mx-2 uppercase tracking-wide
-          text-gray-700 text-xs font-bold"
+          className="w-60 max-[640px]:w-full max-[640px]:mt-2 uppercase tracking-wide
+         text-xs font-bold"
           htmlFor="address"
         >
           Endereço
@@ -86,14 +86,13 @@ function CheckoutForm() {
             onChange={ setFormFields }
             value={ fields.address }
             data-testid="customer_checkout__input-address"
-            className="appearance-none block w-full rounded py-3 px-4 my-2 border
-            leading-tight bg-gray-200 text-gray-700 border-gray-200 focus:outline-none
-            focus:bg-white focus:border-gray-500"
+            className="appearance-none block w-full rounded py-3 px-4 my-2
+            min-[641px]:-mx-1 border-solid border border-black font-normal text-sm"
           />
         </label>
         <label
-          className="w-32 mx-4 uppercase tracking-wide text-gray-700
-          text-xs font-bold mb-2"
+          className="w-32 max-[640px]:w-full max-[640px]:mt-2 uppercase
+          tracking-wide text-xs font-bold"
           htmlFor="addressNumber"
         >
           Número
@@ -105,9 +104,8 @@ function CheckoutForm() {
             onChange={ setFormFields }
             value={ fields.number }
             data-testid="customer_checkout__input-address-number"
-            className="appearance-none block w-full bg-gray-200 text-gray-700 border
-            border-gray-200 rounded py-3 px-4 my-2 leading-tight focus:outline-none
-            focus:bg-white focus:border-gray-500"
+            className="appearance-none block w-full rounded py-3 px-4 my-2
+            min-[641px]:-mx-1 border-solid border border-black font-normal text-sm"
           />
         </label>
       </div>
@@ -115,7 +113,7 @@ function CheckoutForm() {
         type="button"
         onClick={ insertSale }
         data-testid="customer_checkout__button-submit-order"
-        className="bg-green-800 text-white font-bold p-2 rounded hover:brightness-125"
+        className="bg-green-800 text-white font-bold p-4 rounded hover:brightness-125"
       >
         FINALIZAR PEDIDO
       </button>

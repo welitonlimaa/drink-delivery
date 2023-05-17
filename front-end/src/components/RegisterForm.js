@@ -14,15 +14,15 @@ function RegisterForm({ register, fields, setFormFields }) {
 
   return (
     <form
-      className="flex flex-wrap justify-center w-4/6 p-5
+      className="flex flex-wrap justify-center w-4/6 max-[640px]:w-96 p-5
       border-solid border border-gray-400 rounded gap-y-10 shadow-md"
       action="#"
     >
       <div className="flex flex-wrap justify-center w-full gap-x-10">
         <label
           htmlFor="name"
-          className="w-60 uppercase tracking-wide
-          text-gray-700 text-xs font-bold"
+          className="w-60 max-[640px]:w-full min-[641px]:mx-1
+          uppercase tracking-wide text-xs font-bold"
         >
           Nome
           <input
@@ -34,14 +34,14 @@ function RegisterForm({ register, fields, setFormFields }) {
             data-testid="admin_manage__input-name"
             value={ fields.name }
             onChange={ setFormFields }
-            className="p-2 max-[640px]:w-full -mx-1
-            my-1.5 text-lg rounded-lg border-solid border border-black"
+            className="appearance-none block w-full rounded py-3 px-4 my-2
+            min-[641px]:-mx-1 border-solid border border-black font-normal text-sm"
           />
         </label>
         <label
           htmlFor="email"
-          className="w-60 mx-1 uppercase tracking-wide
-          text-gray-700 text-xs font-bold"
+          className="w-60 max-[640px]:w-full min-[641px]:mx-1
+          uppercase tracking-wide text-xs font-bold"
         >
           Email
           <input
@@ -53,14 +53,14 @@ function RegisterForm({ register, fields, setFormFields }) {
             data-testid="admin_manage__input-email"
             value={ fields.email }
             onChange={ setFormFields }
-            className="p-2 max-[640px]:w-full -mx-1
-            my-1.5 text-lg rounded-lg border-solid border border-black"
+            className="appearance-none block w-full rounded py-3 px-4 my-2
+            min-[641px]:-mx-1 border-solid border border-black font-normal text-sm"
           />
         </label>
         <label
           htmlFor="password"
-          className="w-60 mx-1 uppercase tracking-wide
-          text-gray-700 text-xs font-bold"
+          className="w-60 max-[640px]:w-full min-[641px]:mx-1
+          uppercase tracking-wide text-xs font-bold"
         >
           Senha
           <input
@@ -72,16 +72,16 @@ function RegisterForm({ register, fields, setFormFields }) {
             value={ fields.password }
             onChange={ setFormFields }
             data-testid="admin_manage__input-password"
-            className="p-2 max-[640px]:w-full -mx-1
-            my-1.5 text-lg rounded-lg border-solid border border-black"
+            className="appearance-none block w-full rounded py-3 px-4 my-2
+            min-[641px]:-mx-1 border-solid border border-black font-normal text-sm"
           />
         </label>
         <div
-          className="w-60 mx-1 inline-block uppercase tracking-wide
-          text-gray-700 text-xs font-bold"
+          className="w-60 max-[640px]:w-full mx-1 inline-block uppercase tracking-wide
+          text-xs font-bold"
         >
           <p
-            className="w-full block uppercase tracking-wide text-gray-700
+            className="w-full block uppercase tracking-wide
             text-xs font-bold mb-2"
           >
             P. Vendedora Responsável:

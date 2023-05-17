@@ -9,7 +9,7 @@ function Select({ id, name, value, options, dataTestId, handleChange }) {
       defaultValue={ value }
       data-testid={ dataTestId }
       className="min-[641px]:p-2.5 max-[640px]:w-full max-[640px]:p-4
-      -mx-1 -my-0.5 text-lg rounded-lg border-solid border border-black bg-gray-50"
+      max-[640px]:-mx-1 text-lg rounded-lg border-solid border border-black bg-gray-50"
     >
       <option>
         { name }

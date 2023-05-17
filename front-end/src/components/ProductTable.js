@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-function ProductTable({ item, id, name, price, quantity, hasButton, remove }) {
+function ProductTable({ item, id, name, price, quantity, urlImage, hasButton, remove }) {
   const subTotal = (Number(price) * Number(quantity)).toFixed(2);
   const user = JSON.parse(localStorage.getItem('user'));
   return (
@@ -24,7 +24,12 @@ function ProductTable({ item, id, name, price, quantity, hasButton, remove }) {
         }
         className="whitespace-nowrap px-6 py-4"
       >
-        { name }
+        <img
+          src={ urlImage }
+          alt={ name }
+          className="min-[641px]:w-20"
+        />
+        <span>{ name }</span>
       </td>
       <td
         data-testid={
@@ -67,7 +72,7 @@ function ProductTable({ item, id, name, price, quantity, hasButton, remove }) {
               className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
               data-testid={ `${user.role}_checkout__element-order-table-remove-${item}` }
             >
-              Remove
+              Remover
             </button>
           </td>
         ) : null
@@ -81,6 +86,7 @@ ProductTable.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,
+  urlImage: PropTypes.string.isRequired,
   quantity: PropTypes.number.isRequired,
   hasButton: PropTypes.bool.isRequired,
   remove: PropTypes.func.isRequired,
