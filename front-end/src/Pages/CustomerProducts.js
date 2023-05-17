@@ -23,7 +23,11 @@ function CustomerProducts() {
   return (
     <main>
       <Header />
-      <Products />
+      <div
+        className="flex items-center justify-around min-w-full min-h-screen p-10"
+      >
+        <Products />
+      </div>
     </main>
   );
 }

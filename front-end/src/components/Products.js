@@ -46,7 +46,7 @@ function Products() {
   }, [productsCart]);
 
   return (
-    <div>
+    <div className="w-2/3">
       <div className="flex flex-wrap justify-around">
         {
           products.map(({ name, price, urlImage, id, quantity }, index) => (<ProductCard

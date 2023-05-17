@@ -26,11 +26,11 @@ function Cart({ productsCart }) {
       type="button"
       onClick={ () => handleClick('/customer/checkout') }
       data-testid="customer_products__button-cart"
-      className=" fixed bottom-4 left-4 flex justify-center items-center
-      hover:brightness-110"
+      className="fixed bottom-10 right-10 flex justify-center min-w-fit p-3
+      rounded-2xl bg-flamingo-500"
     >
-      <div className="flex justify-center flex-col items-center min-w-fit py-2">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="file: mt-4 h-8 w-8">
+      <div className="flex items-center justify-center w-full">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="file: mt-4 h-8 w-8 my-2 font-bold text-white">
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -45,8 +45,8 @@ function Cart({ productsCart }) {
             <div className="block">
               <p
                 data-testid="customer_products__checkout-bottom-value"
-                className="flex justify-center h-2 min-w-fit items-center rounded-full
-                p-3 text-xs text-white font-medium bg-flamingo-500"
+                className="flex justify-center h-2 min-w-fit items-center
+                p-3 text-white font-bold text-2xl bg-flamingo-500"
               >
                 {`R$ ${(total.toFixed(2)).replace(/\./, ',')}`}
               </p>
