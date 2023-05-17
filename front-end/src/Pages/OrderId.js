@@ -51,91 +51,106 @@ function OrderId() {
   return (
     <>
       <Header />
-      <div className="flex justify-around my-3 capitalize font-bold">
-        <span
-          data-testid={ `${testPrefix}element-order-details-label-order-id` }
+      <div
+        className="flex items-center justify-around flex-col
+        min-w-full min-h-screen my-24 mx-auto"
+      >
+        <div
+          className="flex items-center justify-around max-[640px]:justify-between
+          flex-wrap min-[641px]:w-4/5 max-[640px]:w-96 max-[640px]:p-2.5 mb-10
+          p-10 border-solid border border-gray-400 rounded uppercase font-bold
+          shadow-md bg-gray-100"
         >
-          { `Pedido: ${orderData.id}` }
-        </span>
-        {
-          user.role !== 'customer' ? null : (
-            <div>
-              <span>
-                P. Vendedora:
-                {' '}
-              </span>
-              <span
-                data-testid={ `${testPrefix}element-order-details-label-seller-name` }
-              >
-                { `${orderData.seller.name}` }
-              </span>
-            </div>
-          )
-        }
-        <span
-          data-testid={ `${testPrefix}element-order-details-label-order-date` }
-        >
-          { convertDateFormat(orderData.saleDate, digits) }
-        </span>
-        <span
-          data-testid={ `${testPrefix}element-order-details-label-delivery-status` }
-        >
-          { status }
-        </span>
-        {
-          user.role === 'customer' ? (
-            <button
-              type="button"
-              data-testid={ `${testPrefix}button-delivery-check` }
-              disabled={ status !== 'Em Trânsito' }
-              onClick={ () => updateStatus('Entregue') }
-              className="bg-green-600 p-1 text-white hover:brightness-110
-              disabled:bg-slate-600"
-            >
-              MARCAR COMO ENTREGUE
-            </button>
-          )
-            : (
-              <div className="text-white">
-                <button
-                  type="button"
-                  data-testid={ `${testPrefix}button-preparing-check` }
-                  disabled={ status !== 'Pendente' }
-                  onClick={ () => updateStatus('Preparando') }
-                  className="bg-green-400 p-1 mx-2 hover:brightness-110"
+          <span
+            data-testid={ `${testPrefix}element-order-details-label-order-id` }
+            className="max-[640px]:w-full max-[640px]:m-1.5"
+          >
+            { `Pedido: ${orderData.id}` }
+          </span>
+          {
+            user.role !== 'customer' ? null : (
+              <div className="max-[640px]:w-full max-[640px]:m-1.5">
+                <span>
+                  P. Vendedora:
+                  {' '}
+                </span>
+                <span
+                  data-testid={ `${testPrefix}element-order-details-label-seller-name` }
                 >
-                  PREPARAR PEDIDO
-                </button>
-                <button
-                  type="button"
-                  data-testid={ `${testPrefix}button-dispatch-check` }
-                  disabled={ status !== 'Preparando' }
-                  onClick={ () => updateStatus('Em Trânsito') }
-                  className="bg-green-600 p-1 mx-2 hover:brightness-110"
-                >
-                  SAIU PARA ENTREGA
-                </button>
+                  { `${orderData.seller.name}` }
+                </span>
               </div>
             )
-        }
-      </div>
-      <div className="my-12 max-[640px]:mx-5">
-        <div className="flex flex-col overflow-x-auto">
-          <OrderTable products={ orderData.products } />
-        </div>
-        <div className="flex justify-end min-[641px]:w-full min-[641px]:-ml-8">
-          <p
-            className="w-80 max-[640px]:w-full p-5 my-10
-            rounded-lg font-bold text-center text-3xl text-white bg-flamingo-500"
+          }
+          <span
+            data-testid={ `${testPrefix}element-order-details-label-order-date` }
+            className="max-[640px]:w-full max-[640px]:m-1.5"
           >
-            Total: R$
-            {' '}
-            <span
-              data-testid={ `${testPrefix}element-order-total-price` }
+            { convertDateFormat(orderData.saleDate, digits) }
+          </span>
+          <span
+            data-testid={ `${testPrefix}element-order-details-label-delivery-status` }
+            className="max-[640px]:w-full max-[640px]:m-1.5"
+          >
+            { status }
+          </span>
+          {
+            user.role === 'customer' ? (
+              <button
+                type="button"
+                data-testid={ `${testPrefix}button-delivery-check` }
+                disabled={ status !== 'Em Trânsito' }
+                onClick={ () => updateStatus('Entregue') }
+                className="p-5 max-[640px]:w-full max-[640px]:m-1.5
+                max-[640px]:p-1 text-white rounded-2xl disabled:bg-gray-500 bg-green-600"
+              >
+                MARCAR COMO ENTREGUE
+              </button>
+            )
+              : (
+                <div className="text-white">
+                  <button
+                    type="button"
+                    data-testid={ `${testPrefix}button-preparing-check` }
+                    disabled={ status !== 'Pendente' }
+                    onClick={ () => updateStatus('Preparando') }
+                    className="max-[640px]:w-full max-[640px]:m-1.5 p-5
+                    max-[640px]:p-1 mx-2 rounded-2xl bg-green-400 disabled:bg-gray-500"
+                  >
+                    PREPARAR PEDIDO
+                  </button>
+                  <button
+                    type="button"
+                    data-testid={ `${testPrefix}button-dispatch-check` }
+                    disabled={ status !== 'Preparando' }
+                    onClick={ () => updateStatus('Em Trânsito') }
+                    className="max-[640px]:w-full max-[640px]:m-1.5 p-5
+                    max-[640px]:p-1 mx-2 rounded-2xl bg-indigo-900 disabled:bg-gray-500"
+                  >
+                    SAIU PARA ENTREGA
+                  </button>
+                </div>
+              )
+          }
+        </div>
+        <div className="w-4/5 my-12 max-[640px]:mx-5">
+          <div className="flex flex-col overflow-x-auto">
+            <OrderTable products={ orderData.products } />
+          </div>
+          <div className="flex justify-end min-[641px]:w-full min-[641px]:-ml-8">
+            <p
+              className="w-80 max-[640px]:w-full p-5 my-10
+              rounded-lg font-bold text-center text-3xl text-white bg-flamingo-500"
             >
-              { (total.toFixed(2)).replace(/\./, ',') }
-            </span>
-          </p>
+              Total: R$
+              {' '}
+              <span
+                data-testid={ `${testPrefix}element-order-total-price` }
+              >
+                { (total.toFixed(2)).replace(/\./, ',') }
+              </span>
+            </p>
+          </div>
         </div>
       </div>
     </>
