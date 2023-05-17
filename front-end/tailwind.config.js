@@ -14,6 +14,7 @@ module.exports = {
       emerald: colors.emerald,
       indigo: colors.indigo,
       yellow: colors.yellow,
+      neutral: colors.neutral,
       flamingo: {
         50: '#fef3f2',
         100: '#fee5e2',

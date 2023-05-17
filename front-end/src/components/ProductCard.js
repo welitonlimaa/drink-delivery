@@ -52,7 +52,7 @@ function ProductCard({ id, urlImage, name, price, quantity, updateProductCart })
             onClick={ minus }
             data-testid={ `customer_products__button-card-rm-item-${id}` }
             className="w-[10%] rounded mx-1 text-flamingo-50 text-center select-none
-            bg-flamingo-500"
+            font-extrabold text-xl bg-flamingo-500"
           >
             -
           </button>
@@ -69,7 +69,7 @@ function ProductCard({ id, urlImage, name, price, quantity, updateProductCart })
             onClick={ plus }
             data-testid={ `customer_products__button-card-add-item-${id}` }
             className="w-[10%] rounded mx-1 text-flamingo-50 text-center select-none
-            bg-flamingo-500"
+            font-extrabold text-xl bg-flamingo-500"
           >
             +
           </button>

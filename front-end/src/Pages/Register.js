@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import logo from '../images/logo.png';
 import AppContext from '../context/AppContext';
 import dataValidate from '../utils/dataValidate';
 import { createUser } from '../services/requests';
 import CustomerRegisterForm from '../components/CustomerRegisterForm';
+import logo from '../images/logo-remove.png';
 
 function Register() {
   const { fields, setFormFields, setUserData } = useContext(AppContext);
@@ -42,16 +42,17 @@ function Register() {
   return (
     <>
       <header
-        className="w-full h-16 bg-flamingo-500"
+        className="w-full bg-flamingo-600"
       >
         <Link
           to="/login"
         >
-          <img className="w-16" src={ logo } alt="logo" />
+          <img className="w-60" src={ logo } alt="logo" />
         </Link>
       </header>
       <div
-        className="flex flex-col items-center justify-center min-w-full min-h-screen"
+        className="flex flex-col items-center justify-center min-w-full
+        min-h-screen text-gray-900"
       >
         <h1
           className="inline-block w-full my-4 text-center font-bold text-3xl"

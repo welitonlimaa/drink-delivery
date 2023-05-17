@@ -2,12 +2,12 @@ import React, { useContext, useState, useEffect } from 'react';
 import { Redirect, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { isExpired } from 'react-jwt';
 import AppContext from '../context/AppContext';
-import logo from '../images/logo.png';
 import dataValidate from '../utils/dataValidate';
 import { requestLogin } from '../services/requests';
 import routes from '../json/routes.json';
 import takeaway from '../images/gifs/takeaway.gif';
 import LoginForm from '../components/LoginForm';
+import logo from '../images/logo-remove.png';
 
 function Login() {
   const { fields, setFormFields, userData, setUserData } = useContext(AppContext);
@@ -55,9 +55,9 @@ function Login() {
   return (
     <>
       <header
-        className="w-full h-16 bg-flamingo-500"
+        className="w-full bg-flamingo-600"
       >
-        <img className="w-16" src={ logo } alt="logo" />
+        <img className="w-60" src={ logo } alt="logo" />
       </header>
       <div className="flex items-center justify-around w-full min-h-screen">
         <div className="w-1/3 max-[640px]:hidden">
