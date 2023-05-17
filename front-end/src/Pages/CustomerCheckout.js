@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import CartProductsTable from '../components/CartProductsTable';
 import CheckoutForm from '../components/CheckoutForm';
+import TotalCard from '../components/TotalCard';
 
 function CustomerCheckout() {
   const [total, setTotal] = useState(0);
@@ -19,18 +20,10 @@ function CustomerCheckout() {
           <CartProductsTable setTotal={ setTotal } />
         </div>
         <div className="flex justify-end min-[641px]:w-full min-[641px]:-ml-8">
-          <p
-            className="w-80 max-[640px]:w-full p-5 my-10
-            rounded-lg font-bold text-center text-3xl text-white bg-flamingo-500"
-          >
-            Total: R$
-            {' '}
-            <span
-              data-testid="customer_checkout__element-order-total-price"
-            >
-              { (total.toFixed(2)).replace(/\./, ',') }
-            </span>
-          </p>
+          <TotalCard
+            total={ total }
+            testPrefix="customer_checkout__"
+          />
         </div>
       </div>
       <div

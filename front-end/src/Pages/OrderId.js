@@ -6,6 +6,7 @@ import OrderTable from '../components/OrderTable';
 import sumTotal from '../utils/totalSum';
 import convertDateFormat from '../utils/convertDateFormat';
 import Header from '../components/Header';
+import TotalCard from '../components/TotalCard';
 
 function OrderId() {
   const [status, setStatus] = useState('');
@@ -138,18 +139,10 @@ function OrderId() {
             <OrderTable products={ orderData.products } />
           </div>
           <div className="flex justify-end min-[641px]:w-full min-[641px]:-ml-8">
-            <p
-              className="w-80 max-[640px]:w-full p-5 my-10
-              rounded-lg font-bold text-center text-3xl text-white bg-flamingo-500"
-            >
-              Total: R$
-              {' '}
-              <span
-                data-testid={ `${testPrefix}element-order-total-price` }
-              >
-                { (total.toFixed(2)).replace(/\./, ',') }
-              </span>
-            </p>
+            <TotalCard
+              total={ total }
+              testPrefix={ testPrefix }
+            />
           </div>
         </div>
       </div>
