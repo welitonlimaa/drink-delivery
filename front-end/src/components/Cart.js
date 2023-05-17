@@ -26,7 +26,8 @@ function Cart({ productsCart }) {
       type="button"
       onClick={ () => handleClick('/customer/checkout') }
       data-testid="customer_products__button-cart"
-      className="fixed bottom-10 right-10 flex justify-center min-w-fit p-3
+      className="fixed flex justify-center bottom-10 right-10
+      max-[640px]:bottom-1.5 max-[640px]:right-1 min-w-fit p-3
       rounded-2xl bg-flamingo-500"
     >
       <div className="flex items-center justify-center w-full">
@@ -46,7 +47,7 @@ function Cart({ productsCart }) {
               <p
                 data-testid="customer_products__checkout-bottom-value"
                 className="flex justify-center h-2 min-w-fit items-center
-                p-3 text-white font-bold text-2xl bg-flamingo-500"
+                p-3 text-white font-bold text-2xl max-[640px]:text-normal bg-flamingo-500"
               >
                 {`R$ ${(total.toFixed(2)).replace(/\./, ',')}`}
               </p>
