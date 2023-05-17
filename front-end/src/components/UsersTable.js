@@ -3,7 +3,7 @@ import UserRowTable from './UserRowTable';
 
 function UsersTable({ users, deleteUser }) {
   return (
-    <table className="min-w-full text-left text-sm font-light">
+    <table className="min-w-full text-left text-lg font-light">
       <thead
         className="border-b font-medium dark:border-neutral-500"
       >

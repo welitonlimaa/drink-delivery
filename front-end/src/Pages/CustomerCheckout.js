@@ -15,11 +15,14 @@ function CustomerCheckout() {
   return (
     <div>
       <Header />
-      <div className="my-12 max-[640px]:mx-5">
-        <div className="flex flex-col overflow-x-auto">
+      <div
+        className="flex items-center justify-center flex-col
+        min-w-full my-12 max-[640px]:mx-5"
+      >
+        <div className="flex flex-col overflow-x-auto min-[641px]:w-4/5">
           <CartProductsTable setTotal={ setTotal } />
         </div>
-        <div className="flex justify-end min-[641px]:w-full min-[641px]:-ml-8">
+        <div className="flex justify-end min-[641px]:w-full min-[641px]:mr-20">
           <TotalCard
             total={ total }
             testPrefix="customer_checkout__"

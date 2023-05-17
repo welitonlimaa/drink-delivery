@@ -78,9 +78,10 @@ function AdminManage() {
         }
       </div>
       <div
-        className="flex items-center justify-center w-full my-14
+        className="flex items-center justify-center flex-col w-full my-14
         text-gray-900 font-normal"
       >
+        <h2 className="w-4/6 mb-2 font-bold text-2xl">Cadastrar novo usuário</h2>
         <RegisterForm
           register={ register }
           fields={ fields }
@@ -88,9 +89,15 @@ function AdminManage() {
         />
       </div>
       <div
-        className="flex flex-col overflow-x-auto p-10 text-gray-900 font-normal"
+        className="flex items-center justify-center flex-col w-full border-solid"
       >
-        <UsersTable users={ users } deleteUser={ deleteUser } />
+        <h2 className="w-4/6 mb-2 font-bold text-2xl">Lista de usuários</h2>
+        <div
+          className="flex flex-col overflow-x-auto w-4/6 text-gray-900 font-normal
+          border-solid border border-gray-400 rounded"
+        >
+          <UsersTable users={ users } deleteUser={ deleteUser } />
+        </div>
       </div>
     </>
   );

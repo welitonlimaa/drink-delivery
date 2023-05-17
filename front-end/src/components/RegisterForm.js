@@ -15,7 +15,7 @@ function RegisterForm({ register, fields, setFormFields }) {
   return (
     <form
       className="flex flex-wrap justify-center w-4/6 max-[640px]:w-96 p-5
-      border-solid border border-gray-400 rounded gap-y-10 shadow-md"
+      border-solid border border-gray-400 shadow-md rounded gap-y-10"
       action="#"
     >
       <div className="flex flex-wrap justify-center w-full gap-x-10">
