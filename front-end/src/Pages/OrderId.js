@@ -54,7 +54,7 @@ function OrderId() {
       <Header />
       <div
         className="flex items-center justify-around flex-col
-        min-w-full min-h-screen my-24 mx-auto"
+        min-w-full min-h-screen my-16 mx-auto"
       >
         <div
           className="flex items-center justify-around max-[640px]:justify-between
