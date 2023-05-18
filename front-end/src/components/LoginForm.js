@@ -18,6 +18,7 @@ function LoginForm({ login, handleClick, fields, setFormFields, isValid, unautho
           type="text"
           id="email-input"
           name="email"
+          placeholder="nome@dominio.com"
           value={ fields.email }
           onChange={ setFormFields }
           data-testid="common_login__input-email"
@@ -27,13 +28,14 @@ function LoginForm({ login, handleClick, fields, setFormFields, isValid, unautho
         className="w-full mt-3"
         htmlFor="password-input"
       >
-        Password
+        Senha
         <input
           className="flex items-center h-12 px-4 w-full mt-2
           border-solid border border-black rounded bg-white"
           type="password"
           name="password"
           id="password-input"
+          placeholder="••••••••"
           value={ fields.password }
           onChange={ setFormFields }
           data-testid="common_login__input-password"
