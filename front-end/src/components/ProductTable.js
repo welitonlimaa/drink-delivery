@@ -69,7 +69,7 @@ function ProductTable({ item, id, name, price, quantity, urlImage, hasButton, re
             <button
               type="button"
               onClick={ () => remove(id) }
-              className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+              className="font-bold text-flamingo-500 dark:text-blue-500 hover:underline"
               data-testid={ `${user.role}_checkout__element-order-table-remove-${item}` }
             >
               Remover

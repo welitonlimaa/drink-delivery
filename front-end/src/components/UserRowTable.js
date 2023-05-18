@@ -34,7 +34,7 @@ function UserRowTable({ item, id, name, email, role, deleteUser }) {
         <button
           type="button"
           onClick={ () => deleteUser(id) }
-          className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+          className="font-bold text-flamingo-500 dark:text-blue-500 hover:underline"
           data-testid={ `admin_manage__element-user-table-remove-${item}` }
         >
           Excluir
