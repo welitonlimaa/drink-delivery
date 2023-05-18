@@ -27,7 +27,7 @@ function ProductTable({ item, id, name, price, quantity, urlImage, hasButton, re
         <img
           src={ urlImage }
           alt={ name }
-          className="min-[641px]:w-20"
+          className="w-20"
         />
         <span>{ name }</span>
       </td>

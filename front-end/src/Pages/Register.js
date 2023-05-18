@@ -47,7 +47,7 @@ function Register() {
         <Link
           to="/login"
         >
-          <img className="w-60" src={ logo } alt="logo" />
+          <img className="w-60 max-[640px]:mx-auto" src={ logo } alt="logo" />
         </Link>
       </header>
       <div

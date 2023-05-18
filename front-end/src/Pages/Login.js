@@ -57,7 +57,7 @@ function Login() {
       <header
         className="w-full bg-flamingo-600"
       >
-        <img className="w-60" src={ logo } alt="logo" />
+        <img className="w-60 max-[640px]:mx-auto" src={ logo } alt="logo" />
       </header>
       <div className="flex items-center justify-around w-full min-h-screen">
         <div className="w-1/3 max-[640px]:hidden">
