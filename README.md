@@ -27,7 +27,7 @@ O Drink Delivery é um aplicativo de delivery de cervejas desenvolvido para simp
 ## Deploy
 
 * API: https://drink-delivery-api.up.railway.app/
-* Front-end: https://drink-delivery.vercel.app/
+* Website: https://drink-delivery.vercel.app/
 
 ## Instalação
 
