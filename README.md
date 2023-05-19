@@ -3,7 +3,9 @@
 O Drink Delivery é um aplicativo de delivery de cervejas desenvolvido para simplificar o processo de pedidos, preparo e entrega de bebidas de uma distribuidora. Com o Drink Delivery, os clientes podem fazer pedidos diretamente de seus dispositivos móveis, os vendedores gerenciam o fluxo de pedidos e administradores gerenciam o usuários.
 
 ![small-screen](./assets/small-screen.png)
+
 ![lg-screen](./assets/lg-screen.png)
+
 ## Funcionalidades Principais
 
 * Acesso via login para clientes, vendedores e administradores.
